@@ -203,7 +203,7 @@ export const CycleVibeInteractive: React.FC = () => {
 
                 <div className={styles.padImageContainer}>
                   <Image
-                    src="/images/home_savers_six.png"
+                    src="/images/home_product_pad.png"
                     alt={currentVibe.padRecommendation.size}
                     width={280}
                     height={200}

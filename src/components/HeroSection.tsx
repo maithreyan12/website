@@ -95,7 +95,7 @@ export const HeroSection: React.FC<HeroSectionProps> = () => {
 
               <div className={styles.mainImageCard}>
                 <Image
-                  src="/images/home_savers_six.png"
+                  src="/images/home_product_pad.png"
                   alt="PIAX Anion Sanitary Pad Box Pack"
                   width={520}
                   height={420}

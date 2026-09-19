@@ -14,7 +14,7 @@ import styles from './AppPanel.module.css';
  * so opening it again is instant and her bag, address and login carry over.
  */
 export const AppPanel: React.FC = () => {
-  const { appEntry, isAppOpen, closeApp, setItemCount } = useCart();
+  const { appEntry, isAppOpen, closeApp, setItemCount, setSavedCycle } = useCart();
   const frameRef = useRef<HTMLIFrameElement>(null);
   const [src, setSrc] = useState<string | null>(null);
   const [ready, setReady] = useState(false);
@@ -57,6 +57,14 @@ export const AppPanel: React.FC = () => {
         }
       } else if (data.type === 'piax:cart' && typeof data.count === 'number') {
         setItemCount(data.count);
+      } else if (
+        data.type === 'piax:cycle' &&
+        typeof data.last === 'string' &&
+        /^\d{4}-\d{2}-\d{2}$/.test(data.last) &&
+        typeof data.cycle === 'number' &&
+        typeof data.period === 'number'
+      ) {
+        setSavedCycle({ last: data.last, cycle: data.cycle, period: data.period });
       } else if (data.type === 'piax:close') {
         // She used the app screen's own back arrow on its first page.
         closeApp();

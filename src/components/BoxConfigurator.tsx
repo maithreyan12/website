@@ -17,6 +17,10 @@ import styles from './BoxConfigurator.module.css';
 
 const PADS_PER_PACK = 6;
 
+/** "PIAX Anion Sanitary Pad · Extra Long" -> "Extra Long": the admin's product name, as the app's bag shows it. */
+const shortName = (product: { name: string }) => product.name.split('·').pop()!.trim();
+
+// Kept the same as the app's Build your box (lib/features/shop/build_box_screen.dart).
 interface PresetOption {
   key: string;
   label: string;
@@ -51,7 +55,6 @@ const SIZES: {
   pill: string;
   pillStyle: React.CSSProperties;
   barColor: string;
-  name: string;
   flow: string;
   legend: string;
   icon: (color: string) => React.ReactNode;
@@ -63,7 +66,6 @@ const SIZES: {
     pill: '330 mm · XXL',
     pillStyle: { background: 'var(--heavy-bg)', color: 'var(--heavy-text)', borderColor: 'var(--heavy-border)' },
     barColor: '#D86B52',
-    name: 'Double Extra Long',
     flow: 'Heavy flow days & peaceful overnight sleep',
     legend: 'Heavy (330mm)',
     icon: (c) => <MoonIcon size={18} color={c} />,
@@ -75,7 +77,6 @@ const SIZES: {
     pill: '290 mm · XL',
     pillStyle: { background: 'var(--medium-bg)', color: 'var(--medium-text)', borderColor: 'var(--medium-border)' },
     barColor: '#0D6B5B',
-    name: 'Extra Long',
     flow: 'Daytime movement & moderate-to-heavy hours',
     legend: 'Medium (290mm)',
     icon: (c) => <SunIcon size={18} color={c} />,
@@ -87,7 +88,6 @@ const SIZES: {
     pill: '240 mm · Large',
     pillStyle: { background: 'var(--light-bg)', color: 'var(--light-text)', borderColor: 'var(--light-border)' },
     barColor: '#D97706',
-    name: 'Large Day Pad',
     flow: 'Light flow days, spotting & gentle tapering',
     legend: 'Light (240mm)',
     icon: (c) => <FeatherIcon size={18} color={c} />,
@@ -161,7 +161,7 @@ export const BoxConfigurator: React.FC = () => {
                     </div>
                     <div className={styles.sizeDetails}>
                       <div className={styles.sizeNameRow}>
-                        <h3 className={styles.sizeName}>{s.name}</h3>
+                        <h3 className={styles.sizeName}>{shortName(s.product!)}</h3>
                         <span className={styles.sizeFlowTag}>{s.flow}</span>
                       </div>
                       <p className={styles.sizeDesc}>
@@ -176,7 +176,7 @@ export const BoxConfigurator: React.FC = () => {
                         className={styles.counterBtn}
                         onClick={() => setCount(s.key, -1)}
                         disabled={count <= 0}
-                        aria-label={`Fewer ${s.name} packs`}
+                        aria-label={`Fewer ${shortName(s.product!)} packs`}
                       >
                         −
                       </button>
@@ -185,7 +185,7 @@ export const BoxConfigurator: React.FC = () => {
                         className={styles.counterBtn}
                         onClick={() => setCount(s.key, 1)}
                         disabled={count >= 10}
-                        aria-label={`More ${s.name} packs`}
+                        aria-label={`More ${shortName(s.product!)} packs`}
                       >
                         +
                       </button>
@@ -247,18 +247,20 @@ export const BoxConfigurator: React.FC = () => {
               {/* Price Calculation */}
               <div className={styles.priceContainer}>
                 <div className={styles.priceRow}>
-                  <span>Packs ({totalPacks})</span>
+                  <span>
+                    Price ({totalPacks} {totalPacks === 1 ? 'pack' : 'packs'})
+                  </span>
                   <span className={styles.subtotalPrice}>{formatRupees(packPrice)}</span>
                 </div>
                 {discount > 0 && (
                   <div className={styles.priceRowSavings}>
-                    <span>Auto-Repeat Discount Included</span>
+                    <span>Discount</span>
                     <span className={styles.savingsAmount}>− {formatRupees(discount)}</span>
                   </div>
                 )}
                 {delivery > 0 && (
                   <div className={styles.priceRow}>
-                    <span>Delivery</span>
+                    <span>Delivery Fee</span>
                     <span className={styles.subtotalPrice}>{formatRupees(delivery)}</span>
                   </div>
                 )}

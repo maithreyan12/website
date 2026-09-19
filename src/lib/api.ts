@@ -178,7 +178,7 @@ export const FALLBACK_PRODUCTS: Product[] = [
     is_exclusive: true,
     is_upcoming: false,
     banner_tag: 'BEST SELLER',
-    image_url: '/images/home_savers_six.png',
+    image_url: '/images/home_product_pad.png',
   },
   {
     id: 'prod_pad_xxl_330',

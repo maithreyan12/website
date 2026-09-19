@@ -1,15 +1,15 @@
 .backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(10, 52, 44, 0.55);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(8, 36, 30, 0.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.5rem;
-  animation: fadeIn 220ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  padding: 0.75rem;
+  animation: fadeIn 200ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes fadeIn {
@@ -23,21 +23,27 @@
 
 .modal {
   background: var(--bg-card);
-  border-radius: 28px;
+  border-radius: 22px;
   width: 100%;
-  max-width: 680px;
-  max-height: 92vh;
+  max-width: 580px;
+  max-height: calc(100vh - 24px);
   overflow-y: auto;
-  box-shadow: 0 24px 64px -12px rgba(10, 52, 44, 0.22);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  box-shadow: 0 24px 64px -12px rgba(10, 52, 44, 0.25);
   border: 1px solid var(--border-subtle);
   display: flex;
   flex-direction: column;
-  animation: scaleUp 260ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: scaleUp 220ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.modal::-webkit-scrollbar {
+  display: none;
 }
 
 @keyframes scaleUp {
   from {
-    transform: scale(0.96) translateY(12px);
+    transform: scale(0.96) translateY(6px);
     opacity: 0;
   }
   to {
@@ -50,7 +56,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.25rem 1.75rem;
+  padding: 0.75rem 1.25rem;
   border-bottom: 1px solid var(--border-subtle);
   background: var(--bg-warm-tint);
 }
@@ -58,16 +64,15 @@
 .brandBadge {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  font-family: var(--font-sans);
-  font-size: 0.9rem;
+  gap: 0.5rem;
+  font-size: 0.85rem;
   font-weight: 700;
   color: var(--teal-800);
 }
 
 .closeBtn {
-  width: 36px;
-  height: 36px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
@@ -84,7 +89,7 @@
 }
 
 .progressContainer {
-  height: 4px;
+  height: 3px;
   background: var(--sage-100);
   width: 100%;
 }
@@ -92,59 +97,60 @@
 .progressBar {
   height: 100%;
   background: linear-gradient(90deg, var(--teal-500), var(--rose-500));
-  transition: width 320ms var(--ease-gentle);
+  transition: width 280ms var(--ease-gentle);
 }
 
+/* Question Screen */
 .questionBody {
-  padding: 2rem 2rem 1.75rem;
+  padding: 1.25rem 1.4rem 1rem;
 }
 
 .questionMeta {
-  margin-bottom: 1.75rem;
+  margin-bottom: 1rem;
 }
 
 .stepBadge {
   display: inline-block;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--teal-600);
   background: var(--sage-50);
   border: 1px solid var(--sage-200);
-  padding: 0.25rem 0.75rem;
+  padding: 0.18rem 0.6rem;
   border-radius: 999px;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.4rem;
 }
 
 .questionTitle {
   font-family: var(--font-serif);
-  font-size: 1.65rem;
+  font-size: 1.35rem;
   line-height: 1.25;
   color: var(--text-primary);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3rem;
 }
 
 .questionSubtitle {
-  font-size: 0.95rem;
+  font-size: 0.84rem;
   color: var(--text-secondary);
-  line-height: 1.55;
+  line-height: 1.4;
 }
 
 .optionsList {
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
-  margin-bottom: 1.5rem;
+  gap: 0.55rem;
+  margin-bottom: 0.85rem;
 }
 
 .optionCard {
   display: flex;
   align-items: center;
-  gap: 1.1rem;
-  padding: 1.15rem 1.25rem;
+  gap: 0.85rem;
+  padding: 0.8rem 1rem;
   border: 1.5px solid var(--border-subtle);
-  border-radius: 18px;
+  border-radius: 14px;
   background: var(--bg-card);
   cursor: pointer;
   text-align: left;
@@ -154,19 +160,18 @@
 .optionCard:hover {
   border-color: var(--teal-500);
   background: var(--sage-50);
-  transform: translateY(-1px);
 }
 
 .optionSelected {
   border-color: var(--teal-600);
   background: var(--sage-50);
-  box-shadow: 0 4px 16px rgba(13, 107, 91, 0.08);
+  box-shadow: 0 3px 12px rgba(13, 107, 91, 0.08);
 }
 
 .optionIconCol {
-  width: 44px;
-  height: 44px;
-  border-radius: 14px;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
   background: var(--bg-warm-tint);
   border: 1px solid var(--border-subtle);
   display: flex;
@@ -180,22 +185,21 @@
 }
 
 .optionLabel {
-  font-family: var(--font-sans);
-  font-size: 1rem;
+  font-size: 0.92rem;
   font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.1rem;
 }
 
 .optionSublabel {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--text-muted);
-  line-height: 1.4;
+  line-height: 1.3;
 }
 
 .radioCircle {
-  width: 22px;
-  height: 22px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   border: 2px solid var(--border-light);
   display: flex;
@@ -213,186 +217,189 @@
 .footerNav {
   display: flex;
   justify-content: flex-start;
-  padding-top: 0.5rem;
+  padding-top: 0.2rem;
 }
 
 .prevBtn {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 600;
   color: var(--text-muted);
-  padding: 0.4rem 0.8rem;
-  border-radius: 8px;
-  transition: color var(--transition-fast);
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 .prevBtn:hover {
   color: var(--teal-600);
 }
 
-/* Results Screen */
+/* Results Screen - Compact & No Inner Scrolling */
 .resultBody {
-  padding: 2rem 2.25rem 2.25rem;
+  padding: 1rem 1.4rem 1.1rem;
 }
 
 .resultHero {
   text-align: center;
-  margin-bottom: 1.75rem;
+  margin-bottom: 0.65rem;
 }
 
 .resultPill {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.3rem;
   background: var(--blush-100);
   border: 1px solid var(--blush-200);
   color: var(--rose-700);
-  padding: 0.35rem 0.9rem;
+  padding: 0.2rem 0.65rem;
   border-radius: 999px;
-  font-size: 0.8rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.3rem;
 }
 
 .resultTitle {
   font-family: var(--font-serif);
-  font-size: 1.85rem;
+  font-size: 1.35rem;
   line-height: 1.2;
-  color: var(--text-primary);
-  margin-bottom: 0.6rem;
-}
-
-.resultDesc {
-  font-size: 0.95rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-  max-width: 540px;
-  margin: 0 auto;
-}
-
-.anionCard {
-  background: var(--sage-50);
-  border: 1px solid var(--sage-200);
-  border-radius: 18px;
-  padding: 1.25rem 1.4rem;
-  margin-bottom: 1.75rem;
-}
-
-.anionCardHeader {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--teal-800);
-  font-size: 0.95rem;
-  font-weight: 700;
-  margin-bottom: 0.4rem;
-}
-
-.anionCardText {
-  font-size: 0.88rem;
-  color: var(--teal-900);
-  line-height: 1.5;
-  margin: 0;
-}
-
-.packBreakdown {
-  margin-bottom: 1.75rem;
-}
-
-.breakdownTitle {
-  font-size: 0.85rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--text-muted);
-  margin-bottom: 0.85rem;
-}
-
-.packGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.85rem;
-}
-
-.packItem {
-  padding: 1.1rem;
-  border-radius: 18px;
-  border: 1.5px solid transparent;
-  display: flex;
-  flex-direction: column;
-}
-
-.packHeavy {
-  background: var(--heavy-bg);
-  border-color: var(--heavy-border);
-}
-
-.packMedium {
-  background: var(--medium-bg);
-  border-color: var(--medium-border);
-}
-
-.packLight {
-  background: var(--light-bg);
-  border-color: var(--light-border);
-}
-
-.packItemHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.5rem;
-}
-
-.packBadge {
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 0.2rem 0.5rem;
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.7);
-}
-
-.packHeavy .packBadge {
-  color: var(--heavy-text);
-}
-
-.packMedium .packBadge {
-  color: var(--medium-text);
-}
-
-.packLight .packBadge {
-  color: var(--light-text);
-}
-
-.packCountNumber {
-  font-family: var(--font-serif);
-  font-size: 1.4rem;
-  font-weight: 700;
   color: var(--text-primary);
   margin-bottom: 0.25rem;
 }
 
-.packSubDetails {
-  font-size: 0.78rem;
+.resultDesc {
+  font-size: 0.82rem;
   color: var(--text-secondary);
   line-height: 1.4;
+  max-width: 480px;
+  margin: 0 auto;
 }
 
+/* Product Visual Showcase Banner */
+.productShowcaseBanner {
+  background: linear-gradient(135deg, #FAF7F2 0%, #F5EAE6 100%);
+  border: 1.5px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 0.75rem;
+}
+
+@media (max-width: 500px) {
+  .productShowcaseBanner {
+    padding: 8px 10px;
+    gap: 10px;
+  }
+}
+
+.productVisualLeft {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.productThumbnail {
+  max-height: 70px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(10, 52, 44, 0.12));
+}
+
+.productVisualRight {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.packSummaryTitle {
+  display: flex;
+  flex-direction: column;
+}
+
+.packSummaryTitle strong {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.packSummaryTitle span {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.pillBadgesRow {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-top: 2px;
+}
+
+.microPillHeavy {
+  background: var(--heavy-bg);
+  color: var(--heavy-text);
+  border: 1px solid var(--heavy-border);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 5px;
+}
+
+.microPillMedium {
+  background: var(--medium-bg);
+  color: var(--medium-text);
+  border: 1px solid var(--medium-border);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 5px;
+}
+
+.microPillLight {
+  background: var(--light-bg);
+  color: var(--light-text);
+  border: 1px solid var(--light-border);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 5px;
+}
+
+.anionSnippetText {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.76rem;
+  color: var(--teal-900);
+  line-height: 1.3;
+  margin: 0;
+}
+
+/* Quality Reassurance - Slim */
 .reassuranceRow {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1.5rem;
-  margin-bottom: 1.75rem;
-  padding: 0.85rem;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  padding: 0.4rem 0.6rem;
   background: var(--bg-warm-tint);
-  border-radius: 14px;
+  border-radius: 10px;
+}
+
+@media (max-width: 500px) {
+  .reassuranceRow {
+    gap: 0.5rem;
+    font-size: 0.72rem;
+  }
 }
 
 .rItem {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  font-size: 0.8rem;
+  gap: 0.3rem;
+  font-size: 0.75rem;
   font-weight: 600;
   color: var(--teal-900);
 }
@@ -400,16 +407,16 @@
 .resultActions {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.45rem;
 }
 
 .restartRow {
   text-align: center;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .restartBtn {
-  font-size: 0.82rem;
+  font-size: 0.76rem;
   color: var(--text-muted);
   text-decoration: underline;
   cursor: pointer;
@@ -417,21 +424,4 @@
 
 .restartBtn:hover {
   color: var(--teal-600);
-}
-
-@media (max-width: 640px) {
-  .packGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .reassuranceRow {
-    flex-direction: column;
-    gap: 0.5rem;
-    align-items: flex-start;
-  }
-
-  .questionBody,
-  .resultBody {
-    padding: 1.5rem 1.25rem;
-  }
 }

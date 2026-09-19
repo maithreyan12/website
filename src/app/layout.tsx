@@ -6,7 +6,7 @@ import { Navbar } from '@/components/Navbar';
 import { AppPanel } from '@/components/AppPanel';
 import { FlowQuizModal } from '@/components/FlowQuizModal';
 import { Footer } from '@/components/Footer';
-import { bannerFor, fetchSite } from '@/lib/api';
+import { appLinks, bannerFor, fetchSite } from '@/lib/api';
 
 export const metadata: Metadata = {
   title: 'PIAX — Luxury Organic Period Care & Customized Cycle Box',
@@ -57,13 +57,13 @@ export default async function RootLayout({
             banner={bannerFor(site, 'web_announcement')}
             fallbackHref={site.config.app_android_store_url}
           />
-          <Navbar />
+          <Navbar links={appLinks(site.config)} />
           <main>{children}</main>
           {/* Empathetic Nua-Style Flow & Size Consultation */}
           <FlowQuizModal />
           {/* Bag, checkout, size finder, plans: the PIAX app's own screens. */}
           <AppPanel />
-          <Footer />
+          <Footer config={site.config} links={appLinks(site.config)} />
         </CartProvider>
       </body>
     </html>

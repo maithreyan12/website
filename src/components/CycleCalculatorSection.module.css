@@ -64,6 +64,13 @@
   color: var(--teal-950);
 }
 
+.savedNote {
+  margin: -8px 0 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--teal-700, #0d6b5b);
+}
+
 .formGroup {
   display: flex;
   flex-direction: column;

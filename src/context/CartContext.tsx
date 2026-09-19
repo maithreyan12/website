@@ -4,6 +4,13 @@ import React, { createContext, useContext, useState } from 'react';
 import { Product, SiteConfig, productOfSize, sizeMm } from '@/lib/api';
 import type { AppEntry, AppScreen } from '@/lib/appBridge';
 
+/** Her cycle as saved in PIAX (reported by the app), so the calculator matches the tracker. */
+export interface SavedCycle {
+  last: string; // yyyy-mm-dd
+  cycle: number;
+  period: number;
+}
+
 /** Packs of each size, as chosen in the box builder. */
 export interface PackSelection {
   large: number; // 240 mm
@@ -37,6 +44,8 @@ interface CartContextType {
   isAppOpen: boolean;
   closeApp: () => void;
   setItemCount: (count: number) => void;
+  savedCycle: SavedCycle | null;
+  setSavedCycle: (cycle: SavedCycle) => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -55,6 +64,7 @@ export const CartProvider: React.FC<{
   const [isAppOpen, setIsAppOpen] = useState(false);
   const [isQuizOpen, setIsQuizOpen] = useState(false);
   const [itemCount, setItemCount] = useState(0);
+  const [savedCycle, setSavedCycle] = useState<SavedCycle | null>(null);
 
   const [customPacks, setCustomPacks] = useState<PackSelection>({
     doubleXl: 1,
@@ -67,13 +77,15 @@ export const CartProvider: React.FC<{
     setIsAppOpen(true);
   };
 
-  const addItems = (items: string[]) => {
+  const addItems = (items: string[], mode?: 'box') => {
     if (items.length === 0) return;
-    openApp('add', { items: items.join(',') });
+    openApp('add', mode ? { items: items.join(','), mode } : { items: items.join(',') });
   };
 
   const addToCart = (product: Product, quantity: number = 1) => addItems([bagItem(product, quantity)]);
 
+  // A box sets the bag to exactly these packs (0 takes a size out), so the bag
+  // and checkout show the box she built, however often she taps "Add".
   const addPacksToCart = (packs: PackSelection) =>
     addItems(
       [
@@ -82,8 +94,9 @@ export const CartProvider: React.FC<{
         { mm: 330, quantity: packs.doubleXl },
       ].flatMap(({ mm, quantity }) => {
         const product = productOfSize(products, mm);
-        return product && quantity > 0 ? [bagItem(product, quantity)] : [];
+        return product ? [bagItem(product, Math.max(0, quantity))] : [];
       }),
+      'box',
     );
 
   return (
@@ -105,6 +118,8 @@ export const CartProvider: React.FC<{
         isAppOpen,
         closeApp: () => setIsAppOpen(false),
         setItemCount,
+        savedCycle,
+        setSavedCycle,
       }}
     >
       {children}

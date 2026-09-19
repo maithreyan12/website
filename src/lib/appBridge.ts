@@ -8,6 +8,7 @@
  *   website → app   {type: 'piax:open', open: <AppScreen>, ...params}
  *                   or the first load: <APP_URL>?embed=1&open=<AppScreen>&...params
  *   app → website   {type: 'piax:ready'}  {type: 'piax:cart', count}
+ *                   {type: 'piax:cycle', last: 'yyyy-mm-dd', cycle, period}  (her saved cycle)
  */
 
 /** Where the Flutter web build is served. `npm run build:app` puts it at /app. */
@@ -21,11 +22,12 @@ export type AppScreen =
   | 'learn'
   | 'profile'
   | 'cart'
-  | 'add' // params.items = "<productId>:<packs>,…"
+  | 'add' // params.items = "<productId>:<packs>:<mm>,…"; params.mode = 'box' sets the bag to exactly these packs
+  | 'box' // the app's Build your box; params.packs = "<mm>:<packs>,…"
   | 'product' // params.id = product id
   | 'size-finder'
   | 'plans'
-  | 'tracker'
+  | 'tracker' // params last (yyyy-mm-dd), cycle, period: the calculator's values, if she changed them
   | 'calendar'
   | 'assistants'
   | 'stores'

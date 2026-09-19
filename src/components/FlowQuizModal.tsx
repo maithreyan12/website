@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useCart, type PackSelection } from '@/context/CartContext';
 import {
@@ -37,22 +37,22 @@ const QUESTIONS: Question[] = [
     id: 1,
     badge: 'Step 1 of 4 · Cycle Duration',
     title: 'How many days does your period usually last?',
-    subtitle: 'Every body has its own rhythm. Knowing your duration helps us balance your pad counts so you never run out or overstock.',
+    subtitle: 'Knowing your duration helps us balance your pad counts so you never run out or overstock.',
     options: [
       {
         label: '3 to 4 Days',
         sublabel: 'A shorter, compact cycle with quick tapering.',
-        icon: <DropletIcon size={22} color="#0D6B5B" />,
+        icon: <DropletIcon size={20} color="#0D6B5B" />,
       },
       {
         label: '5 to 6 Days',
         sublabel: 'The classic balanced cycle with distinct heavy and light phases.',
-        icon: <DropletIcon size={22} color="#D86B52" />,
+        icon: <DropletIcon size={20} color="#D86B52" />,
       },
       {
         label: '7 or More Days',
-        sublabel: 'Extended cycle requiring longer coverage and rash-free breathability.',
-        icon: <DropletIcon size={22} color="#9B3D28" />,
+        sublabel: 'Extended cycle requiring longer coverage and anti-chafing breathability.',
+        icon: <DropletIcon size={20} color="#9B3D28" />,
       },
     ],
   },
@@ -60,22 +60,22 @@ const QUESTIONS: Question[] = [
     id: 2,
     badge: 'Step 2 of 4 · Flow Intensity',
     title: 'How intense is your flow on your heaviest days?',
-    subtitle: 'This helps us calculate the exact proportion of 330mm Double XL and 290mm Extra Long pads your body needs.',
+    subtitle: 'This calculates the exact proportion of 330mm Double XL and 290mm Extra Long pads you need.',
     options: [
       {
         label: 'Light to Moderate',
         sublabel: 'Changing pads every 4-6 hours with minimal overflow worry.',
-        icon: <FeatherIcon size={22} color="#0D6B5B" />,
+        icon: <FeatherIcon size={20} color="#0D6B5B" />,
       },
       {
         label: 'Heavy & Frequent',
-        sublabel: 'Changing every 2-3 hours during day 1 and 2, needs fast Japanese SAP lock.',
-        icon: <DropletIcon size={22} color="#D86B52" />,
+        sublabel: 'Changing every 2-3 hours on days 1–2, needs fast Japanese SAP lock.',
+        icon: <DropletIcon size={20} color="#D86B52" />,
       },
       {
         label: 'Very Heavy with Night Anxiety',
-        sublabel: 'Sudden surges and tossing at night; need 330mm wide back protection.',
-        icon: <MoonIcon size={22} color="#9B3D28" />,
+        sublabel: 'Sudden surges and tossing at night; need 330mm wide rear protection.',
+        icon: <MoonIcon size={20} color="#9B3D28" />,
       },
     ],
   },
@@ -83,22 +83,22 @@ const QUESTIONS: Question[] = [
     id: 3,
     badge: 'Step 3 of 4 · Skin Sensitivity',
     title: 'Do you experience itching, chafing, or heat rash from pads?',
-    subtitle: 'Standard plastic topsheets trap heat and breed bacteria. PIAX uses active Anions and plant-cotton to keep skin calm.',
+    subtitle: 'Standard plastic topsheets trap heat. PIAX uses active Anions and plant-cotton to keep skin calm.',
     options: [
       {
         label: 'Yes, very sensitive skin',
         sublabel: 'Frequent redness or chafing; synthetic pads feel scratchy and unbearable.',
-        icon: <HeartHandIcon size={22} color="#D86B52" />,
+        icon: <HeartHandIcon size={20} color="#D86B52" />,
       },
       {
-        label: 'Sometimes during summer or workouts',
-        sublabel: 'Moisture and sweat cause friction and stuffiness on active days.',
-        icon: <LeafIcon size={22} color="#0D6B5B" />,
+        label: 'Sometimes during summer or active days',
+        sublabel: 'Moisture and sweat cause friction and stuffiness on busy days.',
+        icon: <LeafIcon size={20} color="#0D6B5B" />,
       },
       {
         label: 'Rarely, but I insist on zero toxins',
-        sublabel: 'Looking for 0% chlorine, 0% fragrance, and pure medical-grade hygiene.',
-        icon: <ShieldCheckIcon size={22} color="#0D6B5B" />,
+        sublabel: 'Looking for 0% chlorine, 0% fragrance, and pure clinical-grade hygiene.',
+        icon: <ShieldCheckIcon size={20} color="#0D6B5B" />,
       },
     ],
   },
@@ -106,22 +106,22 @@ const QUESTIONS: Question[] = [
     id: 4,
     badge: 'Step 4 of 4 · Comfort Sanctuary',
     title: 'What matters most to you while menstruating?',
-    subtitle: 'We craft your personal pack to give you unconditional reassurance all cycle long.',
+    subtitle: 'We tailor your personal pack to give you unconditional reassurance all cycle long.',
     options: [
       {
         label: 'Zero Skin Friction & Rash-Free Bliss',
         sublabel: 'Feather-soft topsheet with soothing negative ion calming strip.',
-        icon: <FeatherIcon size={22} color="#0D6B5B" />,
+        icon: <FeatherIcon size={20} color="#0D6B5B" />,
       },
       {
         label: 'Total Overnight Leak Peace of Mind',
         sublabel: 'Deep embossed channels & Japanese SAP core so you can sleep in any position.',
-        icon: <MoonIcon size={22} color="#D86B52" />,
+        icon: <MoonIcon size={20} color="#D86B52" />,
       },
       {
         label: 'Hassle-Free Auto-Repeat Delivery',
         sublabel: 'Delivered directly to your door 3 days before your period, every single cycle.',
-        icon: <SparkleIcon size={22} color="#0D6B5B" />,
+        icon: <SparkleIcon size={20} color="#0D6B5B" />,
       },
     ],
   },
@@ -131,6 +131,16 @@ export const FlowQuizModal: React.FC = () => {
   const { isQuizOpen, closeQuiz, setCustomPacks, addPacksToCart } = useCart();
   const [step, setStep] = useState<number>(0);
   const [answers, setAnswers] = useState<number[]>([1, 1, 0, 0]);
+
+  // Lock background body scroll completely when modal is open
+  useEffect(() => {
+    if (!isQuizOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [isQuizOpen]);
 
   if (!isQuizOpen) return null;
 
@@ -150,44 +160,39 @@ export const FlowQuizModal: React.FC = () => {
     }
   };
 
-  // Compute personalized recommendations based on answers:
-  // answers[0]: duration (0: 3-4d, 1: 5-6d, 2: 7+d)
-  // answers[1]: flow (0: light, 1: heavy, 2: very heavy)
   const getRecommendation = (): {
     packs: PackSelection;
     title: string;
     description: string;
     anionBenefit: string;
+    totalPads: number;
   } => {
     const duration = answers[0];
     const flow = answers[1];
 
     if (flow === 2 || (duration === 2 && flow >= 1)) {
       return {
-        packs: { doubleXl: 2, extraLong: 1, large: 1 },
-        title: 'Deep Rest & High-Capacity Comfort Pack',
-        description:
-          'Because you experience heavy flow and overnight anxiety, your custom box provides maximum security with two packs of 330mm Double XL Anion pads, backed by Extra Long and Large pads for daytime comfort.',
-        anionBenefit:
-          'The 6,000+ negative ions per cm³ in each pad inhibit anaerobic bacteria and soothe deep lower abdominal tension naturally.',
+        packs: { doubleXl: 2, extraLong: 1, large: 0 },
+        title: 'Deep Rest & High-Capacity Pack',
+        description: 'Extra overnight coverage with two packs of 330mm Double XL pads and Extra Long pads for active daytime protection.',
+        anionBenefit: '6,000+ negative ions/cm³ relax pelvic muscle tension and inhibit odor naturally.',
+        totalPads: 18,
       };
     } else if (flow === 0 && duration === 0) {
       return {
         packs: { doubleXl: 0, extraLong: 1, large: 2 },
-        title: 'Gentle Flow & Feather-Light Comfort Pack',
-        description:
-          'A soft, breathable balance calibrated for shorter or lighter cycles. Plenty of feather-light 240mm pads with Extra Long pads for your first two days.',
-        anionBenefit:
-          'Hypoallergenic plant-cotton topsheets prevent sweat accumulation and ensure skin remains cool and calm all day.',
+        title: 'Gentle Flow & Feather-Light Pack',
+        description: 'A breathable balance for lighter cycles. Feather-light 240mm pads with Extra Long pads for peak hours.',
+        anionBenefit: 'Hypoallergenic plant-cotton topsheets prevent sweat accumulation and chafing.',
+        totalPads: 18,
       };
     } else {
       return {
         packs: { doubleXl: 1, extraLong: 1, large: 1 },
-        title: 'The Signature Balanced Cycle Sanctuary',
-        description:
-          'Our most celebrated combination for a 5-6 day cycle. 330mm for restful sleeping and peak hours, 290mm for active daytime movement, and 240mm for gentle tapering days.',
-        anionBenefit:
-          'Zero synthetic perfumes, 0% chlorine bleaching, and micro-perforated backsheets eliminate stuffiness completely.',
+        title: 'Signature Balanced Cycle Sanctuary',
+        description: 'Our most loved blend: 330mm for sleep, 290mm for active days, and 240mm for gentle tapering days.',
+        anionBenefit: 'Micro-perforated breathable backsheet releases heat so skin stays dry and cool.',
+        totalPads: 18,
       };
     }
   };
@@ -223,14 +228,14 @@ export const FlowQuizModal: React.FC = () => {
         aria-modal="true"
         aria-label="Flow and Comfort Consultation"
       >
-        {/* Header Bar */}
+        {/* Compact Header Bar */}
         <div className={styles.modalHeader}>
           <div className={styles.brandBadge}>
-            <Image src="/images/logo_lotus.png" alt="PIAX" width={22} height={22} />
-            <span>PIAX Flow & Comfort Consultation</span>
+            <Image src="/images/logo_lotus.png" alt="PIAX" width={20} height={20} />
+            <span>PIAX Flow Consultation</span>
           </div>
           <button className={styles.closeBtn} onClick={closeQuiz} aria-label="Close consultation">
-            <CrossIcon size={18} color="#6E8881" />
+            <CrossIcon size={16} color="#6E8881" />
           </button>
         </div>
 
@@ -268,7 +273,7 @@ export const FlowQuizModal: React.FC = () => {
                       <div className={styles.optionSublabel}>{opt.sublabel}</div>
                     </div>
                     <div className={styles.radioCircle}>
-                      {isSelected && <CheckIcon size={12} color="#FFFFFF" />}
+                      {isSelected && <CheckIcon size={11} color="#FFFFFF" />}
                     </div>
                   </button>
                 );
@@ -284,107 +289,88 @@ export const FlowQuizModal: React.FC = () => {
             </div>
           </div>
         ) : (
-          /* Result Screen */
+          /* Result Screen - Compact & Showing the Real Product Visual */
           <div className={styles.resultBody}>
             <div className={styles.resultHero}>
               <span className={styles.resultPill}>
-                <SparkleIcon size={14} color="#D86B52" />
+                <SparkleIcon size={13} color="#D86B52" />
                 <span>Your Personalized PIAX Comfort Profile</span>
               </span>
               <h2 className={styles.resultTitle}>{rec.title}</h2>
               <p className={styles.resultDesc}>{rec.description}</p>
             </div>
 
-            {/* Anion Comfort Callout */}
-            <div className={styles.anionCard}>
-              <div className={styles.anionCardHeader}>
-                <LeafIcon size={18} color="#0D6B5B" />
-                <strong>Why This Combination Feels Good For Your Body</strong>
+            {/* Product Visual Showcase Banner */}
+            <div className={styles.productShowcaseBanner}>
+              <div className={styles.productVisualLeft}>
+                <Image
+                  src="/images/home_product_pad.png"
+                  alt="PIAX Custom Period Box"
+                  width={140}
+                  height={110}
+                  className={styles.productThumbnail}
+                  priority
+                />
               </div>
-              <p className={styles.anionCardText}>{rec.anionBenefit}</p>
-            </div>
-
-            {/* Pack Breakdown */}
-            <div className={styles.packBreakdown}>
-              <div className={styles.breakdownTitle}>Recommended Box Configuration (18–24 Pads):</div>
-              <div className={styles.packGrid}>
-                {rec.packs.doubleXl > 0 && (
-                  <div className={`${styles.packItem} ${styles.packHeavy}`}>
-                    <div className={styles.packItemHeader}>
-                      <span className={styles.packBadge}>330 mm · XXL</span>
-                      <MoonIcon size={16} color="#B84E37" />
-                    </div>
-                    <div className={styles.packCountNumber}>
-                      {rec.packs.doubleXl} {rec.packs.doubleXl === 1 ? 'pack' : 'packs'}
-                    </div>
-                    <div className={styles.packSubDetails}>
-                      {rec.packs.doubleXl * 6} pads for heavy flow days & overnight rest
-                    </div>
-                  </div>
-                )}
-
-                {rec.packs.extraLong > 0 && (
-                  <div className={`${styles.packItem} ${styles.packMedium}`}>
-                    <div className={styles.packItemHeader}>
-                      <span className={styles.packBadge}>290 mm · XL</span>
-                      <SunIcon size={16} color="#0B6153" />
-                    </div>
-                    <div className={styles.packCountNumber}>
-                      {rec.packs.extraLong} {rec.packs.extraLong === 1 ? 'pack' : 'packs'}
-                    </div>
-                    <div className={styles.packSubDetails}>
-                      {rec.packs.extraLong * 6} pads for regular daytime movement
-                    </div>
-                  </div>
-                )}
-
-                {rec.packs.large > 0 && (
-                  <div className={`${styles.packItem} ${styles.packLight}`}>
-                    <div className={styles.packItemHeader}>
-                      <span className={styles.packBadge}>240 mm · Large</span>
-                      <FeatherIcon size={16} color="#926917" />
-                    </div>
-                    <div className={styles.packCountNumber}>
-                      {rec.packs.large} {rec.packs.large === 1 ? 'pack' : 'packs'}
-                    </div>
-                    <div className={styles.packSubDetails}>
-                      {rec.packs.large * 6} pads for light flow & tapering days
-                    </div>
-                  </div>
-                )}
+              <div className={styles.productVisualRight}>
+                <div className={styles.packSummaryTitle}>
+                  <strong>Your Custom Box: {rec.totalPads} Pads</strong>
+                  <span>6 pads per pack · Individually sealed</span>
+                </div>
+                <div className={styles.pillBadgesRow}>
+                  {rec.packs.doubleXl > 0 && (
+                    <span className={styles.microPillHeavy}>
+                      {rec.packs.doubleXl}x 330mm XXL
+                    </span>
+                  )}
+                  {rec.packs.extraLong > 0 && (
+                    <span className={styles.microPillMedium}>
+                      {rec.packs.extraLong}x 290mm XL
+                    </span>
+                  )}
+                  {rec.packs.large > 0 && (
+                    <span className={styles.microPillLight}>
+                      {rec.packs.large}x 240mm L
+                    </span>
+                  )}
+                </div>
+                <p className={styles.anionSnippetText}>
+                  <LeafIcon size={14} color="#0D6B5B" />
+                  <span>{rec.anionBenefit}</span>
+                </p>
               </div>
             </div>
 
-            {/* Quality Reassurance */}
+            {/* Quality Reassurance - Slim Row */}
             <div className={styles.reassuranceRow}>
               <div className={styles.rItem}>
-                <ShieldCheckIcon size={16} color="#0D6B5B" />
-                <span>100% Rash-Free Guarantee</span>
+                <ShieldCheckIcon size={14} color="#0D6B5B" />
+                <span>100% Rash-Free</span>
               </div>
               <div className={styles.rItem}>
-                <CheckIcon size={14} color="#0D6B5B" />
-                <span>BIS IS 5405:2025 Certified</span>
+                <CheckIcon size={13} color="#0D6B5B" />
+                <span>BIS IS 5405:2025</span>
               </div>
               <div className={styles.rItem}>
-                <LeafIcon size={16} color="#0D6B5B" />
-                <span>0% Plastic Synthetic Feel</span>
+                <LeafIcon size={14} color="#0D6B5B" />
+                <span>0% Plastic Feel</span>
               </div>
             </div>
 
             {/* Actions */}
             <div className={styles.resultActions}>
-              <button className="btn btn-primary btn-lg" onClick={handleDirectAddToCart}>
+              <button className="btn btn-primary" onClick={handleDirectAddToCart}>
                 <span>Add Recommended Box to Bag</span>
-                <ArrowRightIcon size={16} color="#FFFFFF" />
+                <ArrowRightIcon size={15} color="#FFFFFF" />
               </button>
-              <button className="btn btn-secondary btn-lg" onClick={handleApplyToBuilder}>
+              <button className="btn btn-secondary" onClick={handleApplyToBuilder}>
                 Customize Pad Counts in Builder
               </button>
             </div>
 
             <div className={styles.restartRow}>
               <button className={styles.restartBtn} onClick={resetQuiz}>
-                Retake consultation questions
+                Retake questions
               </button>
             </div>
           </div>
