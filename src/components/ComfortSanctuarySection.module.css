@@ -1,0 +1,214 @@
+.sanctuarySection {
+  background: radial-gradient(circle at center top, var(--blush-50) 0%, var(--bg-page) 70%);
+  padding: 96px 0;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.pillBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--blush-100);
+  border: 1px solid var(--blush-200);
+  color: var(--rose-700);
+  padding: 6px 18px;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: 42px;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.italicWord {
+  font-style: italic;
+  color: var(--rose-600);
+}
+
+.subtitle {
+  font-size: 16.5px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+.pillarsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  margin-bottom: 56px;
+}
+
+@media (max-width: 900px) {
+  .pillarsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pillarCard {
+  background: var(--bg-card);
+  border-radius: 24px;
+  padding: 36px 32px;
+  border: 1.5px solid var(--border-subtle);
+  box-shadow: 0 4px 20px rgba(10, 52, 44, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: all var(--transition-smooth);
+}
+
+.pillarCard:hover {
+  border-color: var(--rose-300);
+  box-shadow: 0 12px 32px rgba(216, 107, 82, 0.08);
+  transform: translateY(-3px);
+}
+
+.cardTopRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.iconCircle {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: var(--bg-warm-tint);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.pillarBadge {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--teal-700);
+  background: var(--sage-50);
+  border: 1px solid var(--sage-200);
+  padding: 4px 12px;
+  border-radius: 9999px;
+}
+
+.pillarTitle {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.pillarDesc {
+  font-size: 14.5px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.ritualBox {
+  background: var(--sage-50);
+  border: 1px solid var(--sage-200);
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ritualHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--teal-800);
+}
+
+.ritualText {
+  font-size: 13px;
+  color: var(--teal-900);
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* Comfort Quote Banner */
+.comfortQuoteBanner {
+  background: linear-gradient(135deg, #ffffff 0%, var(--blush-50) 100%);
+  border-radius: 28px;
+  border: 1.5px solid var(--blush-200);
+  padding: 44px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 36px;
+  box-shadow: 0 12px 36px rgba(216, 107, 82, 0.08);
+}
+
+@media (max-width: 860px) {
+  .comfortQuoteBanner {
+    flex-direction: column;
+    text-align: center;
+    padding: 32px 24px;
+  }
+}
+
+.quoteContent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 600px;
+}
+
+.guaranteePill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--teal-800);
+  background: var(--sage-100);
+  border: 1px solid var(--sage-200);
+  padding: 4px 12px;
+  border-radius: 999px;
+  align-self: flex-start;
+}
+
+@media (max-width: 860px) {
+  .guaranteePill {
+    align-self: center;
+  }
+}
+
+.quoteHeading {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.quoteSub {
+  font-size: 14.5px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+.quoteAction {
+  flex-shrink: 0;
+}

@@ -1,0 +1,244 @@
+.appSection {
+  background: #ffffff;
+  padding: 80px 0;
+  border-top: 1px solid var(--border-light);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+@media (max-width: 960px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+.visualCol {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.mockupContainer {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+}
+
+.phoneFrame {
+  border-radius: 40px;
+  overflow: hidden;
+  box-shadow: 0 25px 60px -15px rgba(5, 46, 40, 0.25);
+  border: 8px solid var(--teal-950);
+  background: #ffffff;
+}
+
+.screenImage {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.bubble {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(10px);
+  padding: 10px 16px;
+  border-radius: 16px;
+  border: 1px solid var(--teal-200);
+  box-shadow: 0 10px 24px rgba(5, 46, 40, 0.12);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 2;
+  animation: floatSoft 4s ease-in-out infinite;
+}
+
+.bubbleIconWrap {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: var(--bg-warm-tint);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.bubble strong {
+  display: block;
+  font-size: 13px;
+  color: var(--teal-950);
+}
+
+.bubble span {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.bubbleRider {
+  top: 15%;
+  left: -20px;
+}
+
+.bubbleBot {
+  bottom: 12%;
+  right: -24px;
+  animation-delay: 2s;
+}
+
+@media (max-width: 600px) {
+  .bubble {
+    display: none;
+  }
+}
+
+/* Details Column */
+.detailsCol {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.title {
+  font-size: 38px;
+  color: var(--teal-950);
+  line-height: 1.2;
+}
+
+.desc {
+  font-size: 16.5px;
+  color: var(--text-body);
+  line-height: 1.6;
+}
+
+.featureList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 10px 0;
+}
+
+.featureItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.iconBox {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--teal-50);
+  border: 1px solid var(--teal-200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.featureItem h4 {
+  font-size: 16px;
+  color: var(--teal-950);
+  margin-bottom: 2px;
+}
+
+.featureItem p {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* Download Card */
+.downloadCard {
+  background: radial-gradient(circle at top left, #f3fbf9 0%, #e6f6f4 100%);
+  border: 1.5px solid var(--teal-300);
+  border-radius: 24px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 10px;
+}
+
+@media (max-width: 640px) {
+  .downloadCard {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.qrCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff;
+  padding: 12px;
+  border-radius: 16px;
+  border: 1px solid var(--border-light);
+  flex-shrink: 0;
+}
+
+.qrImage {
+  border-radius: 8px;
+}
+
+.scanLabel {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--teal-700);
+  text-transform: uppercase;
+}
+
+.storeCol {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.storeTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--teal-950);
+}
+
+.storeSub {
+  font-size: 13px;
+  color: var(--text-body);
+}
+
+.storeButtons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.playStoreBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--teal-900);
+  transition: all var(--transition-fast);
+}
+
+.playStoreBtn:hover {
+  background: var(--teal-50);
+  border-color: var(--teal-400);
+  transform: translateY(-1px);
+}

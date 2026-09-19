@@ -1,0 +1,114 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(4, 33, 28, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: flex-end;
+  /* Stays mounted while closed so the app keeps her bag and screen. */
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity var(--transition-normal), visibility 0s linear 250ms;
+}
+
+.open {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity var(--transition-normal), visibility 0s;
+}
+
+.panel {
+  width: min(460px, 100%);
+  height: 100%;
+  background: var(--bg-page);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(24px);
+  transition: transform var(--transition-smooth);
+}
+
+.open .panel {
+  transform: translateX(0);
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border-light);
+  background: var(--bg-card);
+}
+
+.closeBtn {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--teal-700);
+  padding: 8px 10px;
+  border-radius: 9999px;
+  flex: 1;
+  text-align: left;
+}
+
+.closeBtn:hover {
+  background: var(--teal-50);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.spacer {
+  flex: 1;
+}
+
+.frameWrap {
+  position: relative;
+  flex: 1;
+}
+
+.frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: var(--bg-page);
+}
+
+.loader {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: var(--bg-page);
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.loaderLogo {
+  animation: floatSoft 2.4s ease-in-out infinite;
+}
+
+@media (max-width: 600px) {
+  .panel {
+    width: 100%;
+    transform: translateY(16px);
+  }
+
+  .open .panel {
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,309 @@
+.calcSection {
+  background: var(--bg-page);
+  padding: 80px 0;
+}
+
+.header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.title {
+  font-size: 38px;
+  color: var(--teal-950);
+}
+
+.subtitle {
+  font-size: 16px;
+  color: var(--text-body);
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 28px;
+  border: 1.5px solid var(--border-light);
+  box-shadow: var(--shadow-md);
+  padding: 40px;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+@media (max-width: 640px) {
+  .card {
+    padding: 24px;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+@media (max-width: 840px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}
+
+.controlsCol {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.colTitle {
+  font-size: 21px;
+  color: var(--teal-950);
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--teal-900);
+}
+
+.dateInput {
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1.5px solid var(--border-light);
+  background: var(--bg-page);
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--teal-950);
+  outline: none;
+  transition: all var(--transition-fast);
+}
+
+.dateInput:focus {
+  border-color: var(--teal-500);
+  box-shadow: 0 0 0 3px rgba(0, 127, 109, 0.15);
+}
+
+.sliderHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sliderVal {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--teal-600);
+  background: var(--teal-50);
+  padding: 2px 10px;
+  border-radius: 9999px;
+  border: 1px solid var(--teal-200);
+}
+
+.slider {
+  width: 100%;
+  accent-color: var(--teal-500);
+  cursor: pointer;
+  height: 6px;
+  border-radius: 4px;
+}
+
+.sliderMarks {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.hintBox {
+  background: var(--teal-50);
+  border: 1px solid var(--teal-200);
+  border-radius: 14px;
+  padding: 14px 18px;
+  font-size: 13px;
+  color: var(--teal-900);
+  line-height: 1.5;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.hintIconWrap {
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.hintBox strong {
+  font-weight: 700;
+}
+
+.resultsCol {
+  background: radial-gradient(circle at top right, #f4fbf9 0%, #e6f6f4 100%);
+  border: 1.5px solid var(--teal-300);
+  border-radius: 24px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.resultsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.daysBadge {
+  font-size: 12px;
+  font-weight: 800;
+  background: #ffffff;
+  color: var(--coral-500);
+  padding: 4px 12px;
+  border-radius: 9999px;
+  box-shadow: var(--shadow-xs);
+}
+
+.nextPeriodBox {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 20px;
+  border: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.npLabel {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.npDate {
+  font-family: var(--font-heading);
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--teal-950);
+}
+
+.npSub {
+  font-size: 13px;
+  color: var(--teal-700);
+}
+
+.milestoneGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 480px) {
+  .milestoneGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.milestoneCard {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--border-light);
+}
+
+.mIconWrap {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--sage-50);
+  border: 1px solid var(--sage-200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.mLabel {
+  display: block;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.milestoneCard strong {
+  display: block;
+  font-size: 12.5px;
+  color: var(--teal-900);
+}
+
+.recPackBox {
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 14px;
+  padding: 14px;
+  border: 1px dashed var(--teal-400);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.recLabelRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.recLabel {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--teal-900);
+}
+
+.recBadges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.badgeXxl {
+  background: #fde8e3;
+  color: #e87055;
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.badgeXl {
+  background: #e6f6f4;
+  color: #007f6d;
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.badgeL {
+  background: #fef3c7;
+  color: #b45309;
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.resultActions {
+  margin-top: 4px;
+}

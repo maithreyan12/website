@@ -1,0 +1,184 @@
+.reviewsSection {
+  background: var(--bg-page);
+  padding: 80px 0;
+  border-top: 1px solid var(--border-light);
+}
+
+.doctorBanner {
+  background: radial-gradient(circle at top left, #f4fbf9 0%, #ffffff 80%);
+  border: 1.5px solid var(--teal-300);
+  border-radius: 28px;
+  padding: 40px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 32px;
+  align-items: center;
+  margin-bottom: 64px;
+  box-shadow: var(--shadow-sm);
+}
+
+@media (max-width: 768px) {
+  .doctorBanner {
+    grid-template-columns: 1fr;
+    padding: 28px;
+    gap: 20px;
+  }
+}
+
+.docAvatarCol {
+  display: flex;
+  justify-content: center;
+}
+
+.docAvatar {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: var(--teal-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  border: 2px solid var(--teal-400);
+}
+
+.docContentCol {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.docQuote {
+  font-size: 16.5px;
+  color: var(--teal-950);
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.docAuthor strong {
+  display: block;
+  font-size: 15px;
+  color: var(--teal-900);
+}
+
+.docAuthor span {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Header */
+.header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.title {
+  font-size: 38px;
+  color: var(--teal-950);
+}
+
+.subtitle {
+  font-size: 16px;
+  color: var(--text-body);
+}
+
+.reviewsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+@media (max-width: 960px) {
+  .reviewsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.reviewCard {
+  background: #ffffff;
+  border-radius: 24px;
+  border: 1.5px solid var(--border-light);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+}
+
+.reviewCard:hover {
+  border-color: var(--teal-300);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+}
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stars {
+  color: #f59e0b;
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+
+.verifiedBadge {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--teal-700);
+  background: var(--teal-50);
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.quoteText {
+  font-size: 14.5px;
+  color: var(--text-body);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.authorRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-light);
+}
+
+.avatarCircle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--teal-500);
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 17px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.authorName {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--teal-950);
+}
+
+.loc {
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.flowBadge {
+  font-size: 11.5px;
+  color: var(--teal-600);
+}

@@ -1,0 +1,210 @@
+.subSection {
+  background: radial-gradient(circle at 10% 50%, #f4fbf9 0%, #ffffff 70%);
+  padding: 80px 0;
+  border-top: 1px solid var(--border-light);
+}
+
+.header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 52px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.title {
+  font-size: 38px;
+  color: var(--teal-950);
+}
+
+.subtitle {
+  font-size: 16px;
+  color: var(--text-body);
+}
+
+.plansGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  max-width: 940px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .plansGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.planCard {
+  background: #ffffff;
+  border-radius: 28px;
+  border: 1.5px solid var(--border-light);
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  transition: all var(--transition-normal);
+}
+
+.planCard:hover {
+  border-color: var(--teal-400);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+
+.featuredCard {
+  border: 2px solid var(--coral-400);
+  box-shadow: 0 16px 36px rgba(232, 112, 85, 0.15);
+  background: radial-gradient(circle at top right, #fffaf8 0%, #ffffff 80%);
+}
+
+.featuredBadge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--coral-500);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 5px 16px;
+  border-radius: 9999px;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.planHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.planTitle {
+  font-size: 24px;
+  color: var(--teal-950);
+}
+
+.billingSub {
+  font-size: 13.5px;
+  color: var(--teal-600);
+  font-weight: 600;
+}
+
+.priceContainer {
+  margin: 16px 0;
+}
+
+.planPrice {
+  font-family: var(--font-heading);
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--teal-900);
+}
+
+.divider {
+  height: 1px;
+  background: var(--border-light);
+  margin-bottom: 20px;
+}
+
+.perksList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1;
+  margin-bottom: 28px;
+}
+
+.perkItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--text-body);
+  line-height: 1.45;
+}
+
+.checkIconWrap {
+  background: var(--teal-100);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.featuredCard .checkIconWrap {
+  background: var(--coral-100);
+}
+
+.ctaWrapper {
+  margin-top: auto;
+}
+
+.guaranteeText {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 14px;
+}
+
+/* Guarantees 3-col */
+.guaranteeGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 64px;
+}
+
+@media (max-width: 768px) {
+  .guaranteeGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gCard {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 24px;
+  border: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.gIconWrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--sage-50);
+  border: 1px solid var(--sage-200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.gCard h4 {
+  font-size: 17px;
+  color: var(--teal-900);
+}
+
+.gCard p {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}

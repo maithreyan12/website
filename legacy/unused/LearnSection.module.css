@@ -1,0 +1,147 @@
+.section {
+  background: var(--bg-page);
+}
+
+.header {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 36px;
+}
+
+.title {
+  font-size: clamp(28px, 4vw, 40px);
+  margin: 14px 0 10px;
+}
+
+.subtitle {
+  color: var(--text-muted);
+}
+
+.myths {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.myth {
+  text-align: left;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 170px;
+  transition: all var(--transition-normal);
+  color: var(--text-body);
+  font-size: 15px;
+}
+
+.myth:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-md);
+}
+
+.mythOpen {
+  background: var(--teal-50);
+  border-color: var(--teal-200);
+}
+
+.mythQuestion {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--text-main);
+}
+
+.tapHint {
+  margin-top: auto;
+  font-size: 13px;
+  color: var(--teal-600);
+  font-weight: 600;
+}
+
+.verdictTrue,
+.verdictFalse {
+  align-self: flex-start;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 9999px;
+}
+
+.verdictTrue {
+  background: var(--teal-100);
+  color: var(--teal-800);
+}
+
+.verdictFalse {
+  background: var(--coral-100);
+  color: #b4432b;
+}
+
+.explanation {
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.readHeading {
+  font-size: 20px;
+  margin: 56px 0 18px;
+  text-align: center;
+}
+
+.articles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.article {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.article h4 {
+  font-size: 17px;
+}
+
+.article p {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.category {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--teal-600);
+}
+
+.byline {
+  margin-top: auto;
+  font-size: 13px;
+  color: var(--text-body);
+}
+
+.cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+@media (max-width: 480px) {
+  .cta :global(.btn) {
+    width: 100%;
+    white-space: normal;
+  }
+}
