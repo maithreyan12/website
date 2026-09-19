@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { DEFAULT_ANDROID_STORE_URL, type HealthBot, type AppLinks } from '@/lib/api';
 import {
@@ -18,21 +18,41 @@ interface AppShowcaseSectionProps {
 }
 
 export const AppShowcaseSection: React.FC<AppShowcaseSectionProps> = ({ links }) => {
+  const [iframeKey, setIframeKey] = useState(0);
+
   return (
     <section id="app-showcase" className={`section ${styles.appSection}`}>
       <div className="container">
         <div className={styles.grid}>
-          {/* Left Column: Visual Mockup */}
+          {/* Left Column: Interactive Phone Mockup Running Live PIAX App */}
           <div className={styles.visualCol}>
             <div className={styles.mockupContainer}>
               <div className={styles.phoneFrame}>
-                <Image
-                  src="/images/app_screen_care.png"
-                  alt="PIAX App Interface"
-                  width={340}
-                  height={680}
-                  className={styles.screenImage}
-                />
+                <div className={styles.phoneDynamicIsland} />
+                <div className={styles.phoneScreen}>
+                  <iframe
+                    key={iframeKey}
+                    src="/app/index.html?embed=1&open=home"
+                    title="PIAX Mobile App Interactive Live Demo"
+                    className={styles.appIframe}
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
+              <div className={styles.demoToolbar}>
+                <div className={styles.demoPill}>
+                  <span className={styles.liveDot} />
+                  <span>Live Interactive App Demo</span>
+                </div>
+                <button
+                  type="button"
+                  className={styles.resetDemoBtn}
+                  onClick={() => setIframeKey((prev) => prev + 1)}
+                  title="Restart demo"
+                >
+                  Restart Demo
+                </button>
               </div>
 
               <div className={`${styles.bubble} ${styles.bubbleRider}`}>

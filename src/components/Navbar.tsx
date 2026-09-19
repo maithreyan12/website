@@ -11,7 +11,7 @@ interface NavbarProps {
   links?: AppLinks;
 }
 
-export const Navbar: React.FC<NavbarProps> = () => {
+export const Navbar: React.FC<NavbarProps> = ({ links }) => {
   const { itemCount, openCart, openQuiz } = useCart();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -31,50 +31,54 @@ export const Navbar: React.FC<NavbarProps> = () => {
   ];
 
   return (
-    <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
-      <div className="container">
-        <div className={styles.navbar}>
-          {/* Brand Logo - Clean, bold & elegant without extra tagline clutter */}
-          <a href="#" className={styles.logo} aria-label="PIAX Home">
+    <div className={styles.headerWrapper}>
+      <div className={styles.navContainer}>
+        <header className={`${styles.navGlass} ${isScrolled ? styles.scrolled : ''}`}>
+          {/* Brand Link with Lotus Logo and CARE Pill Badge */}
+          <a href="#" className={styles.brandLink} aria-label="PIAX Home">
             <Image
               src="/images/logo_lotus.png"
               alt="PIAX Logo"
               width={32}
               height={32}
-              className={styles.logoIcon}
+              className={styles.brandLogoImg}
               priority
             />
             <span className={styles.brandName}>PIAX</span>
+            <span className={styles.brandPill}>CARE</span>
           </a>
 
-          {/* Streamlined Desktop Navigation (Only 4-5 focused links for optimal UX) */}
+          {/* Desktop Nav: Inner Capsule Pill Track (Matching screenshot style, retaining current Next.js links) */}
           <nav className={styles.desktopNav}>
-            {navLinks.map((link, idx) =>
-              link.onClick ? (
-                <button
-                  key={idx}
-                  onClick={link.onClick}
-                  className={`${styles.navLink} ${styles.quizLink}`}
-                >
-                  <SparkleIcon size={14} color="#D86B52" />
-                  <span>{link.label}</span>
-                </button>
-              ) : (
-                <a key={idx} href={link.href} className={styles.navLink}>
-                  {link.label}
-                </a>
-              )
-            )}
+            <ul className={styles.navMenu}>
+              {navLinks.map((link, idx) => (
+                <li key={idx}>
+                  {link.onClick ? (
+                    <button
+                      onClick={link.onClick}
+                      className={`${styles.navLink} ${styles.quizLink}`}
+                    >
+                      <SparkleIcon size={14} color="#D86B52" />
+                      <span>{link.label}</span>
+                    </button>
+                  ) : (
+                    <a href={link.href} className={styles.navLink}>
+                      {link.label}
+                    </a>
+                  )}
+                </li>
+              ))}
+            </ul>
           </nav>
 
-          {/* Actions: Desktop Quiz CTA + Cart Button + Mobile Toggle */}
+          {/* Actions: Personalize Pack CTA (Liquid Emerald Pill Style) + Cart Bag Button + Mobile Toggle */}
           <div className={styles.actions}>
             <button
               onClick={openQuiz}
-              className={`${styles.actionBtn} btn btn-sm btn-secondary`}
+              className={styles.liquidBtn}
               title="Find Your Personal Pack"
             >
-              <SparkleIcon size={13} color="#D86B52" />
+              <SparkleIcon size={14} color="#FFFFFF" />
               <span>Personalize Pack</span>
             </button>
 
@@ -83,7 +87,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
               className={styles.cartButton}
               aria-label="View Shopping Bag"
             >
-              <CartBagIcon size={20} color="#0A3D34" />
+              <CartBagIcon size={20} color="#052620" />
               {itemCount > 0 && <span className={styles.cartBadge}>{itemCount}</span>}
             </button>
 
@@ -98,7 +102,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
               <span className={`${styles.bar} ${mobileMenuOpen ? styles.barOpen3 : ''}`} />
             </button>
           </div>
-        </div>
+        </header>
 
         {/* Responsive Mobile Drawer */}
         {mobileMenuOpen && (
@@ -146,6 +150,6 @@ export const Navbar: React.FC<NavbarProps> = () => {
           </div>
         )}
       </div>
-    </header>
+    </div>
   );
 };
