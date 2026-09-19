@@ -1,5 +1,6 @@
 import React from 'react';
 import { HeroSection } from '@/components/HeroSection';
+import { CycleVibeInteractive } from '@/components/CycleVibeInteractive';
 import { ComfortSanctuarySection } from '@/components/ComfortSanctuarySection';
 import { BoxConfigurator } from '@/components/BoxConfigurator';
 import { PadAnatomySection } from '@/components/PadAnatomySection';
@@ -19,6 +20,7 @@ export default async function HomePage() {
   return (
     <>
       <HeroSection />
+      <CycleVibeInteractive />
       <ComfortSanctuarySection />
       <BoxConfigurator />
       <PadAnatomySection />

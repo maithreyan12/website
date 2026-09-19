@@ -63,7 +63,19 @@
 
 @media (max-width: 768px) {
   .title {
-    font-size: 38px;
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 500px) {
+  .title {
+    font-size: 30px;
+    line-height: 1.2;
+    text-align: center;
+  }
+  .pillBadge {
+    font-size: 11px;
+    padding: 4px 10px;
   }
 }
 
@@ -78,6 +90,13 @@
   color: var(--text-body);
   line-height: 1.65;
   max-width: 580px;
+}
+
+@media (max-width: 500px) {
+  .description {
+    font-size: 14.5px;
+    text-align: center;
+  }
 }
 
 .actionGroup {
