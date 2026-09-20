@@ -39,6 +39,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-# Flutter web build of the PIAX app (npm run build:app)
-/public/app/

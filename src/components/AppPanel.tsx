@@ -18,6 +18,10 @@ export const AppPanel: React.FC = () => {
   const frameRef = useRef<HTMLIFrameElement>(null);
   const [src, setSrc] = useState<string | null>(null);
   const [ready, setReady] = useState(false);
+  // The loader hides once the app is up — or once it has clearly had long
+  // enough, so a bridge message that never arrives can't leave her staring at
+  // "Opening PIAX…" over an app that is actually running behind it.
+  const [revealed, setRevealed] = useState(false);
   // The entry baked into the iframe URL, and any requested before the app said it's ready.
   const loadedWith = useRef<AppEntry | null>(null);
   const pending = useRef<AppEntry | null>(null);
@@ -28,6 +32,22 @@ export const AppPanel: React.FC = () => {
       appOrigin(),
     );
   };
+
+  useEffect(() => {
+    if (ready) setRevealed(true);
+  }, [ready]);
+
+  // Whatever happens to the bridge, the app is shown a few seconds after the
+  // frame has loaded. The back bar stays until it really reports ready.
+  const revealSoon = (ms: number) => {
+    const timer = setTimeout(() => setRevealed(true), ms);
+    return () => clearTimeout(timer);
+  };
+
+  useEffect(() => {
+    if (!src || revealed) return;
+    return revealSoon(20000);
+  }, [src, revealed]);
 
   // Route each new request to the app.
   useEffect(() => {
@@ -118,7 +138,7 @@ export const AppPanel: React.FC = () => {
         )}
 
         <div className={styles.frameWrap}>
-          {!ready && (
+          {!revealed && (
             <div className={styles.loader}>
               <Image src="/images/logo_lotus.png" alt="" width={56} height={56} className={styles.loaderLogo} />
               <span>Opening PIAX…</span>
@@ -130,6 +150,7 @@ export const AppPanel: React.FC = () => {
             title="PIAX"
             className={styles.frame}
             allow="payment; geolocation; clipboard-write"
+            onLoad={() => revealSoon(6000)}
           />
         </div>
       </div>

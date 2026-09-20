@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="/app/">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="A new Flutter project.">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="pixa">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>PIAX</title>
+  <link rel="manifest" href="manifest.json">
+
+
+  <!--
+    Bridge to the PIAX website, which shows this app in an overlay and asks it to
+    open screens ({type: 'piax:open', open: 'cart'}). Messages that arrive before
+    Flutter starts are queued. See lib/core/services/web_bridge.dart.
+  -->
+  <script>
+    (function () {
+      var queue = [];
+      var handler = null;
+      var hostOrigin = '*';
+      try {
+        if (document.referrer) hostOrigin = new URL(document.referrer).origin;
+      } catch (e) {}
+
+      window.piaxBridge = {
+        setHandler: function (fn) {
+          handler = fn;
+          while (queue.length) handler(queue.shift());
+        },
+        post: function (json) {
+          if (window.parent !== window) window.parent.postMessage(JSON.parse(json), hostOrigin);
+        },
+      };
+
+      // Razorpay's checkout (checkout.js, loaded above or on demand). Calls
+      // onDone once with a JSON string: {ok, order_id, payment_id, signature}
+      // or {ok: false, error}. Used by lib/core/services/razorpay_web.dart.
+      window.piaxRazorpay = function (optionsJson, onDone) {
+        var finished = false;
+        function finish(result) {
+          if (finished) return;
+          finished = true;
+          onDone(JSON.stringify(result));
+        }
+        function open() {
+          var options = JSON.parse(optionsJson);
+          options.handler = function (r) {
+            finish({ ok: true, order_id: r.razorpay_order_id, payment_id: r.razorpay_payment_id, signature: r.razorpay_signature });
+          };
+          options.modal = { ondismiss: function () { finish({ ok: false, error: 'Payment cancelled' }); } };
+          var checkout = new window.Razorpay(options);
+          checkout.on('payment.failed', function (r) {
+            finish({ ok: false, error: (r && r.error && r.error.description) || 'Payment failed' });
+          });
+          checkout.open();
+        }
+        if (window.Razorpay) return open();
+        var script = document.createElement('script');
+        script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+        script.onload = open;
+        script.onerror = function () { finish({ ok: false, error: "Couldn't load the payment page" }); };
+        document.head.appendChild(script);
+      };
+
+      window.addEventListener('message', function (event) {
+        // Only the page that embeds the app may drive it.
+        if (event.source !== window.parent || window.parent === window) return;
+        var data = event.data;
+        if (!data || data.type !== 'piax:open') return;
+        var json = JSON.stringify(data);
+        if (handler) handler(json); else queue.push(json);
+      });
+    })();
+  </script>
+</head>
+<body>
+  <!--
+    You can customize the "flutter_bootstrap.js" script.
+    This is useful to provide a custom configuration to the Flutter loader
+    or to give the user feedback during the initialization process.
+
+    For more details:
+    * https://docs.flutter.dev/platform-integration/web/initialization
+  -->
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>
