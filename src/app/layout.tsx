@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { CartProvider } from '@/context/CartContext';
 import { AnnouncementBar } from '@/components/AnnouncementBar';
@@ -7,6 +7,11 @@ import { AppPanel } from '@/components/AppPanel';
 import { FlowQuizModal } from '@/components/FlowQuizModal';
 import { Footer } from '@/components/Footer';
 import { appLinks, bannerFor, fetchSite } from '@/lib/api';
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+};
 
 export const metadata: Metadata = {
   title: 'PIAX — Luxury Organic Period Care & Customized Cycle Box',
