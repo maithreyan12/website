@@ -34,7 +34,7 @@ export const Navbar: React.FC<NavbarProps> = ({ links }) => {
     <div className={styles.headerWrapper}>
       <div className={styles.navContainer}>
         <header className={`${styles.navGlass} ${isScrolled ? styles.scrolled : ''}`}>
-          {/* Brand Link with Lotus Logo and CARE Pill Badge */}
+          {/* Brand Link with Lotus Logo and Brand Name */}
           <a href="#" className={styles.brandLink} aria-label="PIAX Home">
             <Image
               src="/images/logo_lotus.png"
@@ -45,10 +45,9 @@ export const Navbar: React.FC<NavbarProps> = ({ links }) => {
               priority
             />
             <span className={styles.brandName}>PIAX</span>
-            <span className={styles.brandPill}>CARE</span>
           </a>
 
-          {/* Desktop Nav: Inner Capsule Pill Track (Matching screenshot style, retaining current Next.js links) */}
+          {/* Desktop Nav: Inner Capsule Pill Track */}
           <nav className={styles.desktopNav}>
             <ul className={styles.navMenu}>
               {navLinks.map((link, idx) => (
@@ -71,17 +70,19 @@ export const Navbar: React.FC<NavbarProps> = ({ links }) => {
             </ul>
           </nav>
 
-          {/* Actions: Personalize Pack CTA (Liquid Emerald Pill Style) + Cart Bag Button + Mobile Toggle */}
+          {/* Actions: Desktop Personalize CTA + Cart Bag Button + Adjusted Hamburger Button */}
           <div className={styles.actions}>
+            {/* Desktop Personalize Pack CTA (hidden on responsive/mobile) */}
             <button
               onClick={openQuiz}
-              className={styles.liquidBtn}
+              className={styles.desktopLiquidBtn}
               title="Find Your Personal Pack"
             >
               <SparkleIcon size={14} color="#FFFFFF" />
               <span>Personalize Pack</span>
             </button>
 
+            {/* Shopping Cart Button */}
             <button
               onClick={openCart}
               className={styles.cartButton}
@@ -91,11 +92,11 @@ export const Navbar: React.FC<NavbarProps> = ({ links }) => {
               {itemCount > 0 && <span className={styles.cartBadge}>{itemCount}</span>}
             </button>
 
-            {/* Mobile hamburger button */}
+            {/* Adjusted Hamburger Menu Button */}
             <button
-              className={styles.hamburger}
+              className={`${styles.hamburger} ${mobileMenuOpen ? styles.hamburgerActive : ''}`}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle Navigation Menu"
+              aria-label={mobileMenuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
             >
               <span className={`${styles.bar} ${mobileMenuOpen ? styles.barOpen1 : ''}`} />
               <span className={`${styles.bar} ${mobileMenuOpen ? styles.barOpen2 : ''}`} />
@@ -104,7 +105,7 @@ export const Navbar: React.FC<NavbarProps> = ({ links }) => {
           </div>
         </header>
 
-        {/* Responsive Mobile Drawer */}
+        {/* Responsive Mobile Drawer (inside Hamburger Button) */}
         {mobileMenuOpen && (
           <div className={styles.mobileDropdown}>
             <div className={styles.mobileLinksList}>
@@ -134,16 +135,17 @@ export const Navbar: React.FC<NavbarProps> = ({ links }) => {
               )}
             </div>
 
+            {/* Personalize Pack button placed inside the Hamburger Drawer */}
             <div className={styles.mobileCta}>
               <button
                 onClick={() => {
                   openQuiz();
                   setMobileMenuOpen(false);
                 }}
-                className="btn btn-primary"
-                style={{ width: '100%', justifyContent: 'center' }}
+                className={styles.mobilePersonalizeBtn}
               >
-                <span>Take Flow Consultation</span>
+                <SparkleIcon size={16} color="#FFFFFF" />
+                <span>Personalize Your Pack</span>
                 <ArrowRightIcon size={16} color="#FFFFFF" />
               </button>
             </div>

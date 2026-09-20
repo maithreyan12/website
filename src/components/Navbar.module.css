@@ -1,42 +1,53 @@
-/* Sticky Glass Header - iPhone Liquid Glass Capsule (Matching user screenshot) */
+/* Sticky Glass Header - iPhone Liquid Glass Capsule */
 .headerWrapper {
+  position: -webkit-sticky;
   position: sticky;
   top: 14px;
   left: 0;
   right: 0;
+  width: 100%;
+  box-sizing: border-box;
   z-index: 1000;
   padding: 0 20px;
   pointer-events: none;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .navContainer {
+  width: 100%;
   max-width: 1180px;
   margin: 0 auto;
+  box-sizing: border-box;
   pointer-events: auto;
 }
 
 .navGlass {
-  background: rgba(255, 255, 255, 0.76);
+  background: rgba(255, 255, 255, 0.82);
   backdrop-filter: blur(28px) saturate(190%);
   -webkit-backdrop-filter: blur(28px) saturate(190%);
-  border: 1px solid rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.88);
   box-shadow: 0 16px 36px -10px rgba(5, 38, 32, 0.08), 
               inset 0 1px 1px 0 rgba(255, 255, 255, 0.95),
               inset 0 -1px 1px 0 rgba(0, 0, 0, 0.03);
   border-radius: 999px;
-  padding: 7px 12px 7px 20px;
+  padding: 7px 14px 7px 18px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 12px;
   position: relative;
+  width: 100%;
+  box-sizing: border-box;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .scrolled {
-  background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 20px 40px -8px rgba(5, 38, 32, 0.12),
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  border-color: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 14px 34px -6px rgba(5, 38, 32, 0.12),
+              0 2px 6px rgba(5, 38, 32, 0.04),
               inset 0 1px 1px 0 rgba(255, 255, 255, 1);
 }
 
@@ -48,6 +59,7 @@
   text-decoration: none;
   color: #052620;
   flex-shrink: 0;
+  min-width: 0;
   transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -59,6 +71,7 @@
   height: 32px;
   width: auto;
   object-fit: contain;
+  flex-shrink: 0;
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -72,26 +85,15 @@
   font-size: 21px;
   letter-spacing: -0.5px;
   color: #052620;
+  white-space: nowrap;
 }
 
-.brandPill {
-  font-size: 9.5px;
-  font-weight: 750;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-  background: rgba(45, 212, 191, 0.16);
-  color: #008774;
-  padding: 3px 8px;
-  border-radius: 999px;
-  border: 1px solid rgba(45, 212, 191, 0.32);
-  backdrop-filter: blur(8px);
-}
 .desktopNav {
   display: flex;
   align-items: center;
 }
 
-/* Center Inner Capsule Pill Track (Matching screenshot) */
+/* Center Inner Capsule Pill Track */
 .navMenu {
   display: flex;
   align-items: center;
@@ -159,8 +161,8 @@
   flex-shrink: 0;
 }
 
-/* Specular Liquid Emerald Button (From user screenshot: "Get App") */
-.liquidBtn {
+/* Desktop Liquid Emerald Button */
+.desktopLiquidBtn {
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -178,17 +180,19 @@
   overflow: hidden;
   transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
-.liquidBtn:hover {
+.desktopLiquidBtn:hover {
   transform: translateY(-1px);
   box-shadow: 0 12px 24px -4px rgba(0, 135, 116, 0.45);
 }
 
-.liquidBtn:active {
+.desktopLiquidBtn:active {
   transform: scale(0.96);
 }
 
+/* Circular Cart Button */
 .cartButton {
   position: relative;
   display: flex;
@@ -202,12 +206,17 @@
   transition: all 0.2s ease;
   border: 1px solid rgba(10, 40, 35, 0.08);
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .cartButton:hover {
   background: rgba(255, 255, 255, 0.95);
   box-shadow: 0 4px 12px rgba(5, 38, 32, 0.08);
   transform: translateY(-1px);
+}
+
+.cartButton:active {
+  transform: scale(0.95);
 }
 
 .cartBadge {
@@ -228,64 +237,131 @@
   box-shadow: 0 2px 6px rgba(216, 107, 82, 0.4);
 }
 
+/* Adjusted Circular Hamburger Button (Perfect symmetry with Cart Button) */
 .hamburger {
   display: none;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
-  justify-content: space-around;
-  width: 28px;
-  height: 22px;
-  background: transparent;
-  border: none;
+  gap: 4px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(10, 40, 35, 0.04);
+  border: 1px solid rgba(10, 40, 35, 0.08);
   cursor: pointer;
   padding: 0;
   z-index: 102;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.hamburger:hover,
+.hamburgerActive {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 12px rgba(5, 38, 32, 0.08);
+  border-color: rgba(10, 40, 35, 0.14);
+}
+
+.hamburger:active {
+  transform: scale(0.95);
 }
 
 .bar {
-  width: 100%;
+  width: 16px;
   height: 2px;
   background-color: #052620;
   border-radius: 2px;
-  transition: all 0.25s ease;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: center;
 }
 
 .barOpen1 {
-  transform: rotate(45deg) translate(5px, 6px);
+  transform: translateY(6px) rotate(45deg);
 }
 
 .barOpen2 {
   opacity: 0;
+  transform: scaleX(0);
 }
 
 .barOpen3 {
-  transform: rotate(-45deg) translate(5px, -6px);
+  transform: translateY(-6px) rotate(-45deg);
 }
 
+/* Responsive / Mobile View */
 @media (max-width: 992px) {
   .desktopNav {
-    display: none;
+    display: none !important;
+  }
+  .desktopLiquidBtn {
+    display: none !important; /* Removed Personalize Pack from navbar on responsive */
   }
   .hamburger {
-    display: flex;
+    display: flex !important;
   }
   .headerWrapper {
-    padding: 0 12px;
+    padding: 0 14px;
     top: 10px;
   }
   .navGlass {
-    padding: 6px 14px;
+    padding: 6px 12px 6px 16px;
+    gap: 12px;
+  }
+  .actions {
+    gap: 8px;
   }
 }
 
+@media (max-width: 640px) {
+  .headerWrapper {
+    padding: 0 12px;
+    top: 8px;
+  }
+
+  .navGlass {
+    padding: 6px 10px 6px 14px;
+  }
+
+  .brandLink {
+    gap: 8px;
+  }
+
+  .brandLogoImg {
+    height: 28px;
+    width: 28px;
+  }
+
+  .brandName {
+    font-size: 19px;
+    letter-spacing: -0.4px;
+  }
+
+  .cartButton {
+    width: 36px;
+    height: 36px;
+  }
+
+  .hamburger {
+    width: 36px;
+    height: 36px;
+  }
+
+  .bar {
+    width: 15px;
+  }
+}
+
+/* Mobile Dropdown Drawer (Inside Hamburger Button) */
 .mobileDropdown {
   margin-top: 10px;
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.9);
   border-radius: 24px;
   padding: 16px;
-  box-shadow: 0 16px 40px -10px rgba(5, 38, 32, 0.15);
+  box-shadow: 0 20px 48px -12px rgba(5, 38, 32, 0.16);
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -333,5 +409,36 @@
 }
 
 .mobileCta {
-  margin-top: 10px;
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(10, 40, 35, 0.06);
+}
+
+/* Personalize Pack inside Mobile Hamburger Drawer */
+.mobilePersonalizeBtn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #0d5446 0%, #008774 100%);
+  color: #ffffff !important;
+  padding: 13px 20px;
+  border-radius: 999px;
+  font-size: 14.5px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 8px 20px -4px rgba(0, 135, 116, 0.35);
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+}
+
+.mobilePersonalizeBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px -4px rgba(0, 135, 116, 0.45);
+}
+
+.mobilePersonalizeBtn:active {
+  transform: scale(0.98);
 }
