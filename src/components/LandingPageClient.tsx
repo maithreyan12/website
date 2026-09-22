@@ -1,6 +1,8 @@
 'use client';
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { useCart } from '@/context/CartContext';
+import { productOfSize, Product, FALLBACK_PRODUCTS } from '@/lib/api';
 
 // Pad specifications matching piax-5fqx.onrender.com
 const PAD_DATA = [
@@ -64,6 +66,35 @@ const FAQS = [
 ];
 
 export default function LandingPageClient() {
+  const { addToCart, openCart, openApp, itemCount, products } = useCart();
+  const [addedToast, setAddedToast] = useState<{ name: string; size: string } | null>(null);
+
+  const getProductForIndex = useCallback(
+    (idx: number): Product => {
+      const mm = idx === 0 ? 240 : idx === 1 ? 290 : 330;
+      return (
+        productOfSize(products, mm) ||
+        FALLBACK_PRODUCTS[idx] ||
+        FALLBACK_PRODUCTS[0]
+      );
+    },
+    [products]
+  );
+
+  const handleAddToCart = (prod: Product, e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    addToCart(prod, 1);
+    setAddedToast({ name: prod.name, size: prod.size });
+    setTimeout(() => {
+      setAddedToast((current) => (current?.name === prod.name ? null : current));
+    }, 4000);
+  };
+
+  const handleBuyNow = (prod: Product, e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    addToCart(prod, 1);
+  };
+
   // Mobile drawer state
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
@@ -387,6 +418,7 @@ export default function LandingPageClient() {
   };
 
   const currentPad = PAD_DATA[activePadFlow];
+  const currentProduct = getProductForIndex(activePadFlow);
 
   return (
     <>
@@ -428,6 +460,7 @@ export default function LandingPageClient() {
               { href: '#how-it-works', label: 'How It Works' },
               { href: '#app-preview', label: 'App Preview' },
               { href: '#pads', label: 'Organic Pads' },
+              { href: '#shop', label: 'Shop Packs' },
               { href: '#anatomy', label: 'Pad Anatomy' },
               { href: '#comparison', label: 'Compare' },
               { href: '#faq', label: 'FAQ' },
@@ -449,6 +482,31 @@ export default function LandingPageClient() {
           </ul>
 
           <div className="nav-actions-wrap">
+            {/* View Bag / In-App Cart Button */}
+            <button
+              type="button"
+              className="nav-cart-btn"
+              onClick={() => openCart()}
+              aria-label={`View Shopping Bag (${itemCount} items)`}
+              title="Open Shopping Bag"
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+                <path d="M3 6h18" />
+                <path d="M16 10a4 4 0 0 1-8 0" />
+              </svg>
+              {itemCount > 0 && <span className="nav-cart-badge">{itemCount}</span>}
+            </button>
+
             <a
               href="https://play.google.com/store/apps/details?id=in.co.piax"
               className="liquid-btn nav-desktop-btn"
@@ -518,6 +576,9 @@ export default function LandingPageClient() {
           <a href="#pads" className="m-word-link" onClick={closeMobileNav}>
             Organic Pads
           </a>
+          <a href="#shop" className="m-word-link" onClick={closeMobileNav}>
+            Shop Packs
+          </a>
           <a href="#anatomy" className="m-word-link" onClick={closeMobileNav}>
             Pad Anatomy
           </a>
@@ -530,6 +591,18 @@ export default function LandingPageClient() {
         </div>
 
         <div className="mobile-drawer-cta">
+          <button
+            type="button"
+            className="m-cart-btn"
+            onClick={() => {
+              closeMobileNav();
+              openCart();
+            }}
+          >
+            <span>🛍️ Shopping Bag</span>
+            <span className="brand-pill">{itemCount} {itemCount === 1 ? 'item' : 'items'}</span>
+          </button>
+
           <a
             href="https://play.google.com/store/apps/details?id=in.co.piax"
             className="liquid-btn m-cta-btn"
@@ -1084,32 +1157,50 @@ export default function LandingPageClient() {
 
             <div className="pad-order-row">
               <div className="pad-pricing-box">
-                <span className="pack-size">Packs of 10 / 20 / 30 Pads</span>
-                <span className="pack-subtext">Discreet doorstep delivery before every period</span>
+                <div className="pad-price-tag">
+                  <span className="pad-price-curr">₹{currentProduct.price}</span>
+                  <span className="pad-price-orig">₹{currentProduct.original_price + 30}</span>
+                  <span className="pad-price-badge">PACK OF 6</span>
+                </div>
+                <span className="pack-subtext">Free discreet doorstep delivery before every cycle</span>
               </div>
-              <a
-                href="https://play.google.com/store/apps/details?id=in.co.piax"
-                className="liquid-btn"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span>Order in PIAX App</span>
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+              <div className="pad-order-actions">
+                <button
+                  type="button"
+                  className="btn-add-bag"
+                  onClick={(e) => handleAddToCart(currentProduct, e)}
+                  title="Add to Bag"
                 >
-                  <circle cx="9" cy="21" r="1" />
-                  <circle cx="20" cy="21" r="1" />
-                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-                </svg>
-                <div className="liquid-glimmer"></div>
-              </a>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                    <line x1="12" y1="5" x2="12" y2="19" />
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                  </svg>
+                  <span>Add to Bag</span>
+                </button>
+
+                <button
+                  type="button"
+                  className="liquid-btn"
+                  onClick={(e) => handleBuyNow(currentProduct, e)}
+                >
+                  <span>Buy in PIAX App</span>
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <circle cx="9" cy="21" r="1" />
+                    <circle cx="20" cy="21" r="1" />
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                  </svg>
+                  <div className="liquid-glimmer"></div>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -1139,6 +1230,78 @@ export default function LandingPageClient() {
               Your period cycle countdown automatically pairs with doorstep delivery. Fresh organic pads arrive 2-3 days
               before you need them.
             </p>
+          </div>
+        </div>
+
+        {/* All Products Shelf - Direct Central Catalog */}
+        <div className="products-shelf-wrap" id="shop">
+          <div className="shelf-header">
+            <div className="shelf-eyebrow">🛍️ LIVE CENTRAL CATALOG</div>
+            <h3 className="shelf-title">Order Individual Packs for Any Flow</h3>
+            <p className="shelf-sub">
+              Stock up on your exact preferred size. 6 individually sealed pads per pack with biodegradable discreet wrappers, synchronized live with our central warehouse catalog.
+            </p>
+          </div>
+
+          <div className="shelf-grid">
+            {[0, 1, 2].map((idx) => {
+              const prod = getProductForIndex(idx);
+              const isBestSeller = idx === 1;
+              return (
+                <div key={prod.id || idx} className="shelf-card">
+                  {isBestSeller && <div className="shelf-badge">★ Best Seller</div>}
+                  <div className="shelf-img-box">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={PAD_DATA[idx]?.img || '/static/img/home_product_pad.png'}
+                      alt={prod.name}
+                      className="shelf-img"
+                    />
+                    <span className="shelf-size-pill">{prod.size}</span>
+                  </div>
+
+                  <div className="shelf-rating">
+                    <span>★ {prod.rating || 4.8}</span>
+                    <span className="shelf-review-count">({prod.reviews_count || 140}+ reviews)</span>
+                  </div>
+
+                  <h4 className="shelf-product-title">{prod.name}</h4>
+                  <p className="shelf-product-desc">{prod.description}</p>
+
+                  <div className="shelf-footer">
+                    <div className="shelf-price-col">
+                      <span className="shelf-price">₹{prod.price}</span>
+                      <span className="shelf-pack-lbl">Pack of 6 pads</span>
+                    </div>
+
+                    <div className="shelf-actions">
+                      <button
+                        type="button"
+                        className="shelf-add-btn"
+                        title="Add to Bag"
+                        aria-label={`Add ${prod.name} to Bag`}
+                        onClick={(e) => handleAddToCart(prod, e)}
+                      >
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                          <line x1="12" y1="5" x2="12" y2="19" />
+                          <line x1="5" y1="12" x2="19" y2="12" />
+                        </svg>
+                      </button>
+                      <button
+                        type="button"
+                        className="shelf-buy-btn"
+                        onClick={(e) => handleBuyNow(prod, e)}
+                      >
+                        <span>Buy Now</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                          <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -1531,6 +1694,23 @@ export default function LandingPageClient() {
           </div>
         </div>
       </footer>
+
+      {/* Floating Toast Notification when Item is Added to Bag */}
+      {addedToast && (
+        <div className="toast-bag-alert" role="status">
+          <span>✓ Added {addedToast.name} ({addedToast.size}) to Bag!</span>
+          <button
+            type="button"
+            className="toast-open-btn"
+            onClick={() => {
+              setAddedToast(null);
+              openCart();
+            }}
+          >
+            View Bag →
+          </button>
+        </div>
+      )}
     </>
   );
 }

@@ -1,5 +1,9 @@
+
 import type { Metadata, Viewport } from 'next';
 import './landing.css';
+import { CartProvider } from '@/context/CartContext';
+import { AppPanel } from '@/components/AppPanel';
+import { fetchSite } from '@/lib/api';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -34,20 +38,26 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const site = await fetchSite();
+
   return (
     <html lang="en">
       <head>
         <link rel="icon" href="/static/favicon.svg" type="image/svg+xml" />
       </head>
       <body>
-        <main>{children}</main>
+        <CartProvider products={site.products} config={site.config}>
+          <main>{children}</main>
+          <AppPanel />
+        </CartProvider>
       </body>
     </html>
   );
 }
+
 
