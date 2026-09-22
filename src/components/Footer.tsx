@@ -47,11 +47,11 @@ export const Footer: React.FC<FooterProps> = () => {
           <div className={styles.navCol}>
             <h4 className={styles.colHeading}>Period Care</h4>
             <ul className={styles.linkList}>
-              <li><a href="#custom-box">Build Your Own Box</a></li>
-              <li><a href="#shop">Large Pads (240 mm)</a></li>
-              <li><a href="#shop">Extra Long Pads (290 mm)</a></li>
-              <li><a href="#shop">Double XL Pads (330 mm)</a></li>
-              <li><a href="#subscriptions">Auto-Repeat Period Subscription</a></li>
+              <li><a href="/#custom-box">Build Your Own Box</a></li>
+              <li><a href="/#shop">Large Pads (240 mm)</a></li>
+              <li><a href="/#shop">Extra Long Pads (290 mm)</a></li>
+              <li><a href="/#shop">Double XL Pads (330 mm)</a></li>
+              <li><a href="/#subscriptions">Auto-Repeat Period Subscription</a></li>
             </ul>
           </div>
 
@@ -65,10 +65,10 @@ export const Footer: React.FC<FooterProps> = () => {
                   <span>Flow & Comfort Consultation</span>
                 </button>
               </li>
-              <li><a href="#cycle-calculator">Period & Cycle Predictor</a></li>
-              <li><a href="#app-showcase">15-Minute Emergency Delivery</a></li>
-              <li><a href="#app-showcase">8 AI Health Assistants</a></li>
-              <li><a href="#app-showcase">Gynaecologist Video Consults</a></li>
+              <li><a href="/#cycle-calculator">Period & Cycle Predictor</a></li>
+              <li><a href="/#app-showcase">15-Minute Emergency Delivery</a></li>
+              <li><a href="/#app-showcase">8 AI Health Assistants</a></li>
+              <li><a href="/#app-showcase">Gynaecologist Video Consults</a></li>
             </ul>
           </div>
 
@@ -76,9 +76,9 @@ export const Footer: React.FC<FooterProps> = () => {
           <div className={styles.navCol}>
             <h4 className={styles.colHeading}>Platform & Control</h4>
             <ul className={styles.linkList}>
-              <li><a href="#app-showcase">Delivery Partner App</a></li>
-              <li><a href="#why-piax">Clinical Safety Standards</a></li>
-              <li><a href="#reviews">Doctor Testimonials</a></li>
+              <li><a href="/#app-showcase">Delivery Partner App</a></li>
+              <li><a href="/#why-piax">Clinical Safety Standards</a></li>
+              <li><a href="/#reviews">Doctor Testimonials</a></li>
             </ul>
           </div>
         </div>
@@ -99,7 +99,7 @@ export const Footer: React.FC<FooterProps> = () => {
             © {new Date().getFullYear()} PIAX Wellness Private Limited. All rights reserved.
           </div>
           <div className={styles.legalLinks}>
-            <a href="#">Privacy Policy</a>
+            <a href="/privacy">Privacy Policy</a>
             <span>•</span>
             <a href="#">Terms of Service</a>
             <span>•</span>

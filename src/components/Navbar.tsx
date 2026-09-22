@@ -23,11 +23,11 @@ export const Navbar: React.FC<NavbarProps> = ({ links }) => {
   }, []);
 
   const navLinks = [
-    { label: 'Build Your Box', href: '#custom-box' },
-    { label: 'Shop', href: '#shop' },
-    { label: 'Why PIAX', href: '#why-piax' },
+    { label: 'Build Your Box', href: '/#custom-box' },
+    { label: 'Shop', href: '/#shop' },
+    { label: 'Why PIAX', href: '/#why-piax' },
     { label: 'Flow Quiz', onClick: openQuiz, isQuiz: true },
-    { label: 'Auto-Repeat', href: '#subscriptions' },
+    { label: 'Auto-Repeat', href: '/#subscriptions' },
   ];
 
   return (
@@ -35,7 +35,7 @@ export const Navbar: React.FC<NavbarProps> = ({ links }) => {
       <div className={styles.navContainer}>
         <header className={`${styles.navGlass} ${isScrolled ? styles.scrolled : ''}`}>
           {/* Brand Link with Lotus Logo and Brand Name */}
-          <a href="#" className={styles.brandLink} aria-label="PIAX Home">
+          <a href="/" className={styles.brandLink} aria-label="PIAX Home">
             <Image
               src="/images/logo_lotus.png"
               alt="PIAX Logo"
