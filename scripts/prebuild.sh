@@ -11,12 +11,13 @@ here="$(cd "$(dirname "$0")" && pwd)"
 
 if [[ -n "${NEXT_PUBLIC_PIAX_APP_URL:-}" ]]; then
   echo "prebuild: app screens served from $NEXT_PUBLIC_PIAX_APP_URL"
-elif command -v flutter >/dev/null 2>&1; then
-  bash "$here/build-app.sh"
 elif [[ -f "$here/../public/app/index.html" ]]; then
-  echo "prebuild: Flutter not installed; using the existing public/app"
+  echo "prebuild: using existing public/app bundle"
+elif command -v flutter >/dev/null 2>&1 && [[ -f "$here/../../pubspec.yaml" ]]; then
+  bash "$here/build-app.sh"
 else
   echo "prebuild: public/app is missing and Flutter isn't installed." >&2
   echo "  Run 'npm run build:app' where Flutter is installed, or set NEXT_PUBLIC_PIAX_APP_URL." >&2
   exit 1
 fi
+

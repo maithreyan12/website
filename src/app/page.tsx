@@ -1,35 +1,13 @@
 import React from 'react';
-import { HeroSection } from '@/components/HeroSection';
-import { CycleVibeInteractive } from '@/components/CycleVibeInteractive';
-import { ComfortSanctuarySection } from '@/components/ComfortSanctuarySection';
-import { BoxConfigurator } from '@/components/BoxConfigurator';
-import { PadAnatomySection } from '@/components/PadAnatomySection';
-import { ComparisonSection } from '@/components/ComparisonSection';
-import { ProductCatalog } from '@/components/ProductCatalog';
-import { SubscriptionSection } from '@/components/SubscriptionSection';
-import { CycleCalculatorSection } from '@/components/CycleCalculatorSection';
-import { AppShowcaseSection } from '@/components/AppShowcaseSection';
-import { ReviewsSection } from '@/components/ReviewsSection';
-import { fetchSite } from '@/lib/api';
+import LandingPageClient from '@/components/LandingPageClient';
 
-export const revalidate = 60; // Revalidate every minute
+export const metadata = {
+  title: 'PIAX — Luxury Organic Period Care & Intelligent Cycle Companion',
+  description:
+    'Experience 100% certified organic, rash-free cotton sanitary pads with an intuitive period companion — cycle forecasting, pad change alerts, and private AI wellness support.',
+};
 
-export default async function HomePage() {
-  const site = await fetchSite();
-
-  return (
-    <>
-      <HeroSection />
-      <CycleVibeInteractive />
-      <ComfortSanctuarySection />
-      <BoxConfigurator />
-      <PadAnatomySection />
-      <ComparisonSection />
-      <ProductCatalog initialProducts={site.products} />
-      <SubscriptionSection initialPlans={site.plans} />
-      <CycleCalculatorSection />
-      <AppShowcaseSection />
-      <ReviewsSection />
-    </>
-  );
+export default function HomePage() {
+  return <LandingPageClient />;
 }
+
