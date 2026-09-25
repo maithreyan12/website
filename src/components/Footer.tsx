@@ -101,11 +101,13 @@ export const Footer: React.FC<FooterProps> = () => {
           <div className={styles.legalLinks}>
             <a href="/privacy">Privacy Policy</a>
             <span>•</span>
-            <a href="#">Terms of Service</a>
+            <a href="/terms">Terms of Service</a>
             <span>•</span>
-            <a href="#">Refund Policy</a>
+            <a href="/refund">Cancellation &amp; Refund Policy</a>
             <span>•</span>
-            <a href="#">Contact Support</a>
+            <a href="/shipping">Shipping Policy</a>
+            <span>•</span>
+            <a href="/contact">Contact Support</a>
           </div>
         </div>
       </div>

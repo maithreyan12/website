@@ -16,6 +16,10 @@ const nextConfig: NextConfig = {
         hostname: '**.piax.care',
       },
       {
+        protocol: 'https',
+        hostname: '**.piax.co.in',
+      },
+      {
         protocol: 'http',
         hostname: 'localhost',
       },

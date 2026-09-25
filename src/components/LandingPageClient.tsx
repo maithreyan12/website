@@ -126,6 +126,7 @@ export default function LandingPageClient() {
   const heroGlareRef = useRef<HTMLDivElement>(null);
 
   const handleHeroMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches) return;
     const card = heroCardRef.current;
     const glare = heroGlareRef.current;
     if (!card) return;
@@ -134,13 +135,13 @@ export default function LandingPageClient() {
     const y = e.clientY - rect.top;
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
-    const rotateX = ((y - centerY) / centerY) * -12;
-    const rotateY = ((x - centerX) / centerX) * 12;
+    const rotateX = ((y - centerY) / centerY) * -10;
+    const rotateY = ((x - centerX) / centerX) * 10;
 
     card.style.transition = 'transform 0.1s ease-out';
-    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.015, 1.015, 1.015)`;
     if (glare) {
-      glare.style.background = `radial-gradient(circle 320px at ${x}px ${y}px, rgba(255,255,255,0.7), transparent 70%)`;
+      glare.style.background = `radial-gradient(circle 320px at ${x}px ${y}px, rgba(255,255,255,0.6), transparent 70%)`;
     }
   };
 
@@ -212,6 +213,7 @@ export default function LandingPageClient() {
 
   const handlePhoneStageMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (phoneMode === 'spin') return;
+    if (typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches) return;
     const stage = phoneStageRef.current;
     const wrapper = phoneWrapperRef.current;
     if (!stage || !wrapper) return;
@@ -222,8 +224,8 @@ export default function LandingPageClient() {
     const y = e.clientY - rect.top;
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
-    const rotY = ((x - centerX) / centerX) * 22;
-    const rotX = ((y - centerY) / centerY) * -18;
+    const rotY = ((x - centerX) / centerX) * 20;
+    const rotX = ((y - centerY) / centerY) * -16;
     currentRotXRef.current = rotX;
     currentRotYRef.current = rotY;
     updatePhoneTransform(rotX, rotY, false);
@@ -394,6 +396,30 @@ export default function LandingPageClient() {
     sections.forEach((s) => observer.observe(s));
     return () => observer.disconnect();
   }, [moveNavPill]);
+
+  // Scroll reveal IntersectionObserver for smooth Apple-style section reveals
+  useEffect(() => {
+    const revealEls = document.querySelectorAll('.reveal-on-scroll');
+    if (!('IntersectionObserver' in window) || revealEls.length === 0) {
+      revealEls.forEach((el) => el.classList.add('is-revealed'));
+      return;
+    }
+
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    revealEls.forEach((el) => revealObserver.observe(el));
+    return () => revealObserver.disconnect();
+  }, []);
 
   // 7. FAQ Accordion
   const [activeFaq, setActiveFaq] = useState<number | null>(0);
@@ -616,16 +642,20 @@ export default function LandingPageClient() {
             <div className="liquid-glimmer"></div>
           </a>
           <div className="m-drawer-footer">
-            <a href="/privacy" className="m-privacy-link">
-              Privacy Policy
-            </a>{' '}
-            &bull; <span>Not a medical device</span>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', justifyContent: 'center', marginBottom: '8px', fontSize: '12px' }}>
+              <a href="/privacy" className="m-privacy-link">Privacy</a> &bull;
+              <a href="/terms" className="m-privacy-link">Terms</a> &bull;
+              <a href="/refund" className="m-privacy-link">Refunds</a> &bull;
+              <a href="/shipping" className="m-privacy-link">Shipping</a> &bull;
+              <a href="/contact" className="m-privacy-link">Contact</a>
+            </div>
+            <span>&copy; {new Date().getFullYear()} PIAX Wellness Private Limited</span>
           </div>
         </div>
       </div>
 
       {/* Hero Section with 3D Mouse Parallax Stage */}
-      <section className="container hero-wrap">
+      <section className="container hero-wrap reveal-on-scroll">
         <div className="hero-grid">
           <div className="hero-text-col">
             <div className="tag-badge">
@@ -770,7 +800,7 @@ export default function LandingPageClient() {
 
       {/* Metric / Trust Highlights */}
       <div className="container">
-        <div className="metric-bar">
+        <div className="metric-bar reveal-on-scroll">
           <div className="metric-col">
             <div className="metric-number">100%</div>
             <div className="metric-title">Organic Cotton</div>
@@ -800,7 +830,7 @@ export default function LandingPageClient() {
       </div>
 
       {/* HOW PIAX WORKS SECTION */}
-      <section id="how-it-works" className="container how-it-works-section">
+      <section id="how-it-works" className="container how-it-works-section reveal-on-scroll">
         <div className="sec-header">
           <div className="sec-eyebrow">THE 3-STEP WELLNESS PROTOCOL</div>
           <h2 className="sec-title">How PIAX Reinvents Your Period Experience</h2>
@@ -884,7 +914,7 @@ export default function LandingPageClient() {
       </section>
 
       {/* 3D SMARTPHONE APP EXPERIENCE */}
-      <section id="app-preview" className="container phone-showcase-section">
+      <section id="app-preview" className="container phone-showcase-section reveal-on-scroll">
         <div className="phone-experience-grid">
           <div
             className="phone-perspective-stage"
@@ -1044,7 +1074,7 @@ export default function LandingPageClient() {
       </section>
 
       {/* Organic Pads Showcase Section - iPhone Liquid Glass Design */}
-      <section id="pads" className="container organic-pads-section">
+      <section id="pads" className="container organic-pads-section reveal-on-scroll">
         <div className="sec-header">
           <div className="sec-eyebrow">100% GOTS ORGANIC COTTON &bull; RASH-FREE DEFENSE</div>
           <h2 className="sec-title">PIAX Pure Organic Sanitary Pads</h2>
@@ -1234,7 +1264,7 @@ export default function LandingPageClient() {
         </div>
 
         {/* All Products Shelf - Direct Central Catalog */}
-        <div className="products-shelf-wrap" id="shop">
+        <div className="products-shelf-wrap reveal-on-scroll" id="shop">
           <div className="shelf-header">
             <div className="shelf-eyebrow">🛍️ LIVE CENTRAL CATALOG</div>
             <h3 className="shelf-title">Order Individual Packs for Any Flow</h3>
@@ -1307,7 +1337,7 @@ export default function LandingPageClient() {
       </section>
 
       {/* Pad Anatomy Section */}
-      <section id="anatomy" className="container anatomy-section">
+      <section id="anatomy" className="container anatomy-section reveal-on-scroll">
         <div className="sec-header">
           <div className="sec-eyebrow">UNCOMPROMISING QUALITY</div>
           <h2 className="sec-title">Engineered Layer-by-Layer for Ultimate Skin Comfort</h2>
@@ -1370,7 +1400,7 @@ export default function LandingPageClient() {
       </section>
 
       {/* Comparison Section */}
-      <section id="comparison" className="container comparison-section">
+      <section id="comparison" className="container comparison-section reveal-on-scroll">
         <div className="sec-header">
           <div className="sec-eyebrow">THE HONEST COMPARISON</div>
           <h2 className="sec-title">Conventional Pads vs. PIAX Organic Care</h2>
@@ -1514,7 +1544,7 @@ export default function LandingPageClient() {
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="container faq-section">
+      <section id="faq" className="container faq-section reveal-on-scroll">
         <div className="sec-header">
           <div className="sec-eyebrow">GOT QUESTIONS?</div>
           <h2 className="sec-title">Frequently Asked Questions</h2>
@@ -1551,7 +1581,7 @@ export default function LandingPageClient() {
 
       {/* Download App CTA Banner with 3D QR Code Card */}
       <div className="container">
-        <div className="cta-banner">
+        <div className="cta-banner reveal-on-scroll">
           <div>
             <h2>Step Into Your Healthiest Cycle Yet</h2>
             <p>
@@ -1629,19 +1659,50 @@ export default function LandingPageClient() {
                 <span className="brand-name">PIAX</span>
               </a>
               <p>
-                Dedicated to transforming women&apos;s reproductive hygiene with 100% certified organic comfort and
-                empowering mobile health technology.
+                Luxury organic period care and intelligent cycle companion. 100% certified organic cotton topsheet with negative-ion strip technology.
               </p>
+              <div className="footer-cert-pills">
+                <span className="footer-cert-pill">BIS IS 5405:2025</span>
+                <span className="footer-cert-pill">ISO 11737-1:2018</span>
+                <span className="footer-cert-pill">Crafted in India</span>
+              </div>
             </div>
 
             <div>
               <div className="footer-col-title">Products &amp; Care</div>
               <ul className="footer-links-list">
                 <li>
-                  <a href="#anatomy">Organic Cotton Pads</a>
+                  <a href="#pads">Day Regular Pads (240 mm)</a>
                 </li>
                 <li>
-                  <a href="#app-preview">Menstrual Tracker App</a>
+                  <a href="#pads">Heavy Flow Pads (290 mm)</a>
+                </li>
+                <li>
+                  <a href="#pads">Overnight 360&deg; Pads (330 mm)</a>
+                </li>
+                <li>
+                  <a href="#shop">Shop Pad Multi-Packs</a>
+                </li>
+                <li>
+                  <a href="#anatomy">8-Layer Organic Tech</a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <div className="footer-col-title">Companion App</div>
+              <ul className="footer-links-list">
+                <li>
+                  <a href="#how-it-works">Period &amp; Cycle Predictor</a>
+                </li>
+                <li>
+                  <a href="#app-preview">Smart 4-Hour Pad Timer</a>
+                </li>
+                <li>
+                  <a href="#app-preview">15-Min Emergency Delivery</a>
+                </li>
+                <li>
+                  <a href="#app-preview">AI Wellness Assistants</a>
                 </li>
                 <li>
                   <a
@@ -1649,48 +1710,42 @@ export default function LandingPageClient() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Download for Android
+                    Google Play Store &rarr;
                   </a>
                 </li>
               </ul>
             </div>
 
             <div>
-              <div className="footer-col-title">Legal &amp; Safety</div>
+              <div className="footer-col-title">Legal &amp; Compliance</div>
               <ul className="footer-links-list">
                 <li>
                   <a href="/privacy">Privacy Policy</a>
                 </li>
                 <li>
-                  <a href="/privacy#medical">Account Deletion</a>
+                  <a href="/terms">Terms of Service</a>
                 </li>
                 <li>
-                  <a href="/privacy">Data Protection</a>
+                  <a href="/refund">Cancellation &amp; Refund Policy</a>
                 </li>
                 <li>
-                  <a href="/privacy#medical">Medical Notice</a>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <div className="footer-col-title">Connect &amp; Support</div>
-              <ul className="footer-links-list">
-                <li>
-                  <a href="mailto:support@piax.care">support@piax.care</a>
+                  <a href="/shipping">Shipping &amp; Delivery Policy</a>
                 </li>
                 <li>
-                  <a href="https://piax-5fqx.onrender.com/docs" target="_blank" rel="noopener noreferrer" style={{ opacity: 0.6, fontSize: '12px' }}>
-                    Developer API &rarr;
-                  </a>
+                  <a href="/contact">Contact Support</a>
                 </li>
               </ul>
             </div>
           </div>
 
           <div className="footer-bottom-bar">
-            <div>&copy; 2026 PIAX Technologies. All rights reserved.</div>
-            <div>Proudly made for women everywhere.</div>
+            <div>&copy; {new Date().getFullYear()} PIAX Wellness Private Limited. All rights reserved.</div>
+            <div>
+              Registered in Chennai, Tamil Nadu, India &middot;{' '}
+              <a href="mailto:support@piax.co.in" style={{ color: 'inherit', textDecoration: 'underline' }}>
+                support@piax.co.in
+              </a>
+            </div>
           </div>
         </div>
       </footer>

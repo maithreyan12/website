@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     title: 'PIAX — Luxury Organic Period Care & Intelligent Cycle Companion',
     description:
       'Experience 100% certified organic, rash-free cotton sanitary pads with an intuitive period companion — cycle forecasting, pad change alerts, and private AI wellness support.',
-    url: 'https://piax.care',
+    url: 'https://piax.co.in',
     siteName: 'PIAX',
     locale: 'en_IN',
     type: 'website',

@@ -12,6 +12,11 @@ export default function PrivacyPage() {
   return (
     <div className={styles.page}>
       <div className={styles.wrap}>
+        <div style={{ marginBottom: '16px' }}>
+          <a href="/" style={{ color: 'var(--primary-emerald, #008774)', textDecoration: 'none', fontWeight: 600, fontSize: '14px', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+            &larr; Back to PIAX Home
+          </a>
+        </div>
         <header className={styles.header}>
           <h1 className={styles.title}>Privacy Policy</h1>
           <p className={styles.updated}>
@@ -115,9 +120,9 @@ export default function PrivacyPage() {
             data, please contact our Data Protection Team:
           </p>
           <p>
-            <strong>Email:</strong> <a href="mailto:support@piax.care">support@piax.care</a>
+            <strong>Email:</strong> <a href="mailto:support@piax.co.in">support@piax.co.in</a>
             <br />
-            <strong>Website:</strong> <a href="https://piax.care">https://piax.care</a>
+            <strong>Website:</strong> <a href="https://piax.co.in">https://piax.co.in</a>
           </p>
         </section>
       </div>
