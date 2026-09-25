@@ -815,6 +815,11 @@ body {
   font-size: 13px;
 }
 
+.proof-text {
+  font-size: 13px;
+  color: var(--text-sub);
+}
+
 /* ==========================================================================
    HERO 3D INTERACTIVE VISUAL CARD (Liquid Glass Product Stage)
    ========================================================================== */
@@ -2382,6 +2387,125 @@ body {
 
 /* Medium Mobile & Small Tablets (<= 768px) */
 @media (max-width: 768px) {
+  .hero-text-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .tag-badge {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  .hero-h1 {
+    text-align: center;
+    width: 100%;
+  }
+
+  .hero-lead {
+    text-align: center;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-proof {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 8px;
+    margin: 0 auto 32px;
+    width: 100%;
+  }
+
+  .avatar-stack {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+  }
+
+  .proof-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .proof-stars {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: 3px;
+    margin-bottom: 4px;
+    text-align: center;
+  }
+
+  .proof-text {
+    text-align: center;
+    font-size: 13.5px;
+  }
+
+  .hero-3d-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+  }
+
+  .hero-visual-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 24px 16px;
+    border-radius: 28px;
+    max-width: min(420px, 94vw);
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  .hero-product-image {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    max-height: 220px;
+    object-fit: contain;
+  }
+
+  .hero-pill-badge {
+    position: static;
+    transform: none !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    max-width: 92%;
+    margin: 0 auto 16px;
+    padding: 8px 18px;
+    border-radius: 9999px;
+    box-sizing: border-box;
+  }
+
+  .hero-pill-badge.pos-bottom-right {
+    margin-top: 16px;
+    margin-bottom: 0;
+  }
+
+  .hero-pill-badge > div {
+    text-align: left;
+  }
+
   .metric-bar {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
@@ -2441,6 +2565,16 @@ body {
     padding: 16px 0 36px;
   }
 
+  .tag-badge {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-size: clamp(11px, 3.2vw, 12.5px);
+    padding: 6px 14px;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
   .hero-h1 {
     font-size: clamp(28px, 8vw, 36px);
     line-height: 1.15;
@@ -2455,22 +2589,52 @@ body {
 
   .hero-cta-group {
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     max-width: 320px;
     gap: 12px;
-    margin: 0 auto 28px;
+    margin: 0 auto 24px;
   }
 
   .btn-play,
   .btn-glass-secondary {
     width: 100%;
+    max-width: 320px;
+    box-sizing: border-box;
     justify-content: center;
+    align-items: center;
+    text-align: center;
     border-radius: 16px;
     height: 52px;
   }
 
+  .btn-play .play-text-col {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .hero-proof {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 8px;
+    margin: 0 auto 32px;
+    width: 100%;
+  }
+
+  .proof-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 13.5px;
+  }
+
   .hero-visual-card {
-    padding: 28px 18px;
+    padding: 24px 16px;
     border-radius: 28px;
   }
 
@@ -2481,14 +2645,19 @@ body {
   .hero-pill-badge {
     position: static;
     transform: none !important;
-    width: 100%;
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
-    margin-bottom: 12px;
+    width: auto;
+    max-width: 92%;
+    margin: 0 auto 14px;
+    padding: 8px 16px;
+    border-radius: 9999px;
   }
 
   .hero-pill-badge.pos-bottom-right {
     margin-bottom: 0;
-    margin-top: 12px;
+    margin-top: 14px;
   }
 
   /* Smartphone Showcase */

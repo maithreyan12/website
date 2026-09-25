@@ -717,34 +717,31 @@ export default function LandingPageClient() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/static/img/avatar_kaavya.png"
-                  alt="User"
+                  alt="Kaavya"
                   onError={(e) => {
                     e.currentTarget.src = '/static/favicon.svg';
                   }}
                 />
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/static/img/avatar_kaavya.png"
-                  alt="User"
-                  style={{ filter: 'hue-rotate(40deg)' }}
+                  src="/static/img/avatar_ananya.jpg"
+                  alt="Ananya"
                   onError={(e) => {
                     e.currentTarget.src = '/static/favicon.svg';
                   }}
                 />
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/static/img/avatar_kaavya.png"
-                  alt="User"
-                  style={{ filter: 'hue-rotate(80deg)' }}
+                  src="/static/img/avatar_priya.jpg"
+                  alt="Priya"
                   onError={(e) => {
                     e.currentTarget.src = '/static/favicon.svg';
                   }}
                 />
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/static/img/avatar_kaavya.png"
-                  alt="User"
-                  style={{ filter: 'hue-rotate(120deg)' }}
+                  src="/static/img/avatar_divya.jpg"
+                  alt="Divya"
                   onError={(e) => {
                     e.currentTarget.src = '/static/favicon.svg';
                   }}
@@ -752,7 +749,9 @@ export default function LandingPageClient() {
               </div>
               <div className="proof-copy">
                 <div className="proof-stars">★★★★★</div>
-                <strong>Rated 4.9/5</strong> by 10,000+ women in India
+                <div className="proof-text">
+                  <strong>Rated 4.9/5</strong> by 10,000+ women in India
+                </div>
               </div>
             </div>
           </div>
