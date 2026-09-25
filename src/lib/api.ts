@@ -121,7 +121,7 @@ export interface CartItem {
 }
 
 export const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_BASE_URL || 'https://piax-5fqx.onrender.com';
+  process.env.NEXT_PUBLIC_API_BASE_URL || 'https://api.piax.co.in';
 
 export const DEFAULT_ANDROID_STORE_URL =
   'https://play.google.com/store/apps/details?id=in.co.piax';

@@ -13,7 +13,7 @@ if [[ -n "${NEXT_PUBLIC_PIAX_APP_URL:-}" ]]; then
   echo "prebuild: app screens served from $NEXT_PUBLIC_PIAX_APP_URL"
 elif [[ -f "$here/../public/app/index.html" ]]; then
   echo "prebuild: using existing public/app bundle"
-elif command -v flutter >/dev/null 2>&1 && [[ -f "$here/../../pubspec.yaml" ]]; then
+elif command -v flutter >/dev/null 2>&1 && [[ -f "$here/../../piax/pubspec.yaml" || -f "$here/../../pubspec.yaml" ]]; then
   bash "$here/build-app.sh"
 else
   echo "prebuild: public/app is missing and Flutter isn't installed." >&2

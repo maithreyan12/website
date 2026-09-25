@@ -8,7 +8,13 @@
 set -euo pipefail
 
 here="$(cd "$(dirname "$0")" && pwd)"
-repo="$(cd "$here/../.." && pwd)"
+if [[ -f "$here/../../piax/pubspec.yaml" ]]; then
+  repo="$(cd "$here/../../piax" && pwd)"
+elif [[ -f "$here/../piax/pubspec.yaml" ]]; then
+  repo="$(cd "$here/../piax" && pwd)"
+else
+  repo="$(cd "$here/../.." && pwd)"
+fi
 out="$here/../public/app"
 
 defines=(--dart-define=ENVIRONMENT=production)
