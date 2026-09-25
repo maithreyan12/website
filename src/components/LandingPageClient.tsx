@@ -1171,16 +1171,16 @@ export default function LandingPageClient() {
 
             <ul className="pad-benefit-bullets">
               <li>
-                ✓ <strong>GOTS-Certified 100% Organic Cotton</strong> topsheet
+                <strong>GOTS-Certified 100% Organic Cotton</strong> topsheet
               </li>
               <li>
-                ✓ <strong>Natural Anion Anti-Odor Core</strong> inhibits bacteria &amp; smell
+                <strong>Natural Anion Anti-Odor Core</strong> inhibits bacteria &amp; smell
               </li>
               <li>
-                ✓ <strong>Micro-porous breathable backsheet</strong> eliminates sweating &amp; heat
+                <strong>Micro-porous breathable backsheet</strong> eliminates sweating &amp; heat
               </li>
               <li>
-                ✓ <strong>Individually sealed in biodegradable film</strong> with easy disposal tab
+                <strong>Individually sealed in biodegradable film</strong> with easy disposal tab
               </li>
             </ul>
 
