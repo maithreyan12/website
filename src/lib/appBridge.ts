@@ -46,3 +46,18 @@ export function appEntryUrl(entry: AppEntry): string {
 export function appOrigin(): string {
   return new URL(APP_URL, window.location.href).origin;
 }
+
+export function isAllowedOrigin(origin: string): boolean {
+  try {
+    const url = new URL(origin);
+    return (
+      url.origin === appOrigin() ||
+      url.hostname === 'piax.co.in' ||
+      url.hostname === 'www.piax.co.in' ||
+      url.hostname === 'localhost' ||
+      url.hostname === '127.0.0.1'
+    );
+  } catch {
+    return false;
+  }
+}

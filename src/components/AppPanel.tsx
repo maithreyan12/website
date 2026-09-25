@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useCart } from '@/context/CartContext';
-import { type AppEntry, appEntryUrl, appOrigin } from '@/lib/appBridge';
+import { type AppEntry, appEntryUrl, appOrigin, isAllowedOrigin } from '@/lib/appBridge';
 import styles from './AppPanel.module.css';
 
 /**
@@ -29,7 +29,7 @@ export const AppPanel: React.FC = () => {
   const send = (entry: AppEntry) => {
     frameRef.current?.contentWindow?.postMessage(
       { type: 'piax:open', open: entry.open, ...entry.params },
-      appOrigin(),
+      '*',
     );
   };
 
@@ -66,7 +66,7 @@ export const AppPanel: React.FC = () => {
   // Messages from the app.
   useEffect(() => {
     const onMessage = (event: MessageEvent) => {
-      if (event.source !== frameRef.current?.contentWindow || event.origin !== appOrigin()) return;
+      if (event.source !== frameRef.current?.contentWindow || !isAllowedOrigin(event.origin)) return;
       const data = event.data;
       if (!data || typeof data !== 'object') return;
       if (data.type === 'piax:ready') {
